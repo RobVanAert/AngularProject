@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  team: string = "assets/images/teamPicture.jpg"
   constructor() { }
 
   ngOnInit() {
