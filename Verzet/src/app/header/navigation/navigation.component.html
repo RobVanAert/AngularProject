@@ -14,12 +14,13 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
+    <mat-toolbar color="primary" class="topnav">
       <a>
         <img 
-        [src]="imageURL"
+        [src] = "imageURL"
         [style.width.px] = "imageWidth"
-        alt="Het Verzet"/>
+        alt = "Het Verzet"
+        class = "logo"/>
       </a>
       <span class="menu-spacer"></span>
       <div *ngIf="!(isHandset$ | async)">

@@ -16,6 +16,14 @@
   z-index: 1;
 }
 
+.topnav {
+  margin-bottom: 10px;
+}
+
+.logo {
+  height: 100%;
+  vertical-align: middle;
+}
 
 .hidden  { 
   display: none;
