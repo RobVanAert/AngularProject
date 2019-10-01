@@ -1,5 +1,28 @@
-<p>home works!</p>
-
-
-<iframe src="https://gadgets.buienradar.nl/gadget/zoommap/?lat=51.40029&lng=4.76034&overname=2&zoom=8&naam=Hoogstraten&size=2b&voor=1" 
-scrolling=no width=330 height=330 frameborder=no></iframe>
+<div 
+    gdAreas = "content weather | sponsor sponsor"
+    gdGap = "16px"
+    gdRows = "auto auto"
+    gdAreas.lt-sm = "content | weather | sponsor"
+    gdRows.lt-sm = "auto auto auto"
+    class= "mainContent">
+    <div gdArea = "content" >
+         <h1 fxLayoutAlign="center">Welkom</h1>
+        <p>Het Verzet is een fietsclub in Minderhout. Wij trekken er elke zondag op uit voor verschillende ritten ...</p>
+    </div>
+    <div gdArea = "weather" >
+        <div fxLayoutAlign = "end"
+        fxLayoutAlign.lt-sm = "center"
+        class= "buienradar">
+            <iframe src="https://gadgets.buienradar.nl/gadget/zoommap/?lat=51.40029&lng=4.76034&overname=2&zoom=8&naam=Hoogstraten&size=2b&voor=1" 
+            scrolling=no width=330 height=330 frameborder=no></iframe>
+        </div>
+        <div fxLayoutAlign = "end"
+            fxLayoutAlign.lt-sm = "center">
+            <iframe src="https://www.meteo.be/services/widget/.?postcode=2320&nbDay=2&type=4&lang=nl&bgImageId=14&bgColor=567cd2&scrolChoice=0&colorTempMax=ffffff&colorTempMin=A5D6FF"
+            scrolling="no" width="334" height ="175" frameborder="0" marginwidth="0" marginheight="0"></iframe>
+        </div>
+    </div>  
+    <div gdArea = "sponsor">
+        <h2>Onze Sponsoren</h2>
+    </div>
+</div>
