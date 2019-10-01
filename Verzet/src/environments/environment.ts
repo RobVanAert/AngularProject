@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  firebase: {
+  firebaseConfig: {
     apiKey: "AIzaSyCSv8Ub2duKGn00l6mmTJyRrzrNSUybXwY",
     authDomain: "het-verzet.firebaseapp.com",
     databaseURL: "https://het-verzet.firebaseio.com",

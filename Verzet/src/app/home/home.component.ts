@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  sponsors: Observable<any[]>;
+  constructor(private db: AngularFireDatabase) { 
+    this.sponsors = db.list('Sponsors').valueChanges();
+    console.log(this.sponsors);
+  }
 
   ngOnInit() {
   }

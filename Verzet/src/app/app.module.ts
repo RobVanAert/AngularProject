@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AngularFireModule } from 'angularfire2';
+import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -36,7 +37,7 @@ import { MatListModule } from '@angular/material/list';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    AngularFireModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig, 'het verzet'),
     AngularFireDatabaseModule
   ],
   providers: [],
