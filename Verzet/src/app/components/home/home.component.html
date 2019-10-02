@@ -24,5 +24,22 @@
     </div>  
     <div gdArea = "sponsor">
         <h2>Onze Sponsoren</h2>
+        <div fxLayout="row wrap" 
+            fxLayoutAlign="space-between">  
+            <div *ngFor = "let sponsor of sponsors">
+                <div *ngIf = "sponsor.url;else noUrl">
+                        <a [href] = "sponsor.url" target="_blank">
+                            <img [src] = "sponsor.imageLink" 
+                                [alt] = "sponsor.name"
+                                [style.height.px] = imageHeight>
+                        </a>
+                </div> 
+                <ng-template #noUrl>
+                    <img [src] = "sponsor.imageLink" 
+                            [alt] = "sponsor.name"
+                            [style.height.px] = imageHeight>
+                </ng-template>              
+            </div>
+        </div>    
     </div>
 </div>

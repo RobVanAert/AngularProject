@@ -9,7 +9,8 @@ import { Sponsor } from './sponsor';
 })
 export class HomeComponent implements OnInit {
 
-  sponsors: Sponsor[] =[ ];
+  sponsors: Sponsor[] = [];
+  imageHeight: number = 100;
 
   constructor(private sponsorService: SponsorService) { 
    
