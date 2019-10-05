@@ -8,12 +8,10 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class SponsorService {
 
-  constructor(private db: AngularFirestore) { 
-
-  }
+  constructor(private firestore: AngularFirestore) { }
 
   getSponsors(): Observable<Sponsor[]>
   {
-    return this.db.collection<Sponsor>('Sponsors').valueChanges();
+    return this.firestore.collection<Sponsor>('Sponsors').valueChanges();
   }
 }

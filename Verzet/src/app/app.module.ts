@@ -14,7 +14,8 @@ import { HomeComponent } from './components/home/home.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { FooterComponent } from './components/footer/footer.component';
 import { CalenderComponent } from './components/calender/calender.component';
-
+import { DateAdapter } from '@angular/material';
+import { CustomDateAdapter } from './components/calender/custom-date-adapter';
 
 @NgModule({
   declarations: [
@@ -32,9 +33,13 @@ import { CalenderComponent } from './components/calender/calender.component';
     FlexLayoutModule,
     LayoutModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
   ],
-  providers: [AngularFirestore],
+  providers: [AngularFirestore, { provide: DateAdapter, useClass: CustomDateAdapter }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(private dateAdapter: DateAdapter<Date>) {
+    this.dateAdapter.setLocale('NL');
+  }
+}

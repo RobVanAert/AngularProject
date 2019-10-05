@@ -1,7 +1,10 @@
-<div class="container" fxLayout="row" fxLayout.xs="column"  fxLayoutAlign="center">
-    <div fxFlex="20%" >
-      <mat-card>
-        <mat-calendar [dateClass]="dateClass()" [selected]="selectedDate" (selectedChange)="onSelect($event)"> </mat-calendar>
-      </mat-card>
-    </div>
+<div class= "mainContent">
+  <h1>Kalender</h1>
+  <div class="calenderContainer" fxLayout="row" fxLayout.xs="column"  fxLayoutAlign="center">
+      <div fxFlex="35%" >
+        <mat-card>
+          <mat-calendar [dateClass]="dateClass()" [selected]="selectedDate" (selectedChange)="onSelect($event)"> </mat-calendar>
+        </mat-card>
+      </div>
+  </div>
 </div>
