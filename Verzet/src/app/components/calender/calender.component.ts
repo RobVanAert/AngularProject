@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChange, SimpleChanges, OnChanges } from '@angular/core';
 import { MatCalendarCellCssClasses } from '@angular/material';
-import { EventService } from 'src/app/services/event.service';
-import { Event } from './event';
-import { delay } from 'rxjs/operators';
+import { ActivityService} from 'src/app/services/activity.service';
+import { Activity } from './activity';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-calender',
@@ -11,30 +11,54 @@ import { delay } from 'rxjs/operators';
 })
 export class CalenderComponent implements OnInit {
   
-  selectedDate: any;
-  events: Event[] = [];
+  selectedDate: any = new Date();
+  activities: Activity[] = [];
+  activity: Activity;
+  isActivityDate: boolean;
+  defaultActivity: Activity = new Activity;
 
-  constructor(private eventService: EventService) { }
-
-  onSelect(event){
-    console.log(this.selectedDate);
-    console.log(event);
-    this.selectedDate= event;
-  }
+  constructor(private activitiesService: ActivityService) { }
 
   ngOnInit() {
-    this.eventService.getEvents().subscribe(
-      events => this.events = events
-    ) ;
+    this.activitiesService.getActivities().subscribe(
+      (activities: Activity[]) => {this.activities = activities;}
+    );
+
+    this.findActivity();
   } 
+
+  onSelect(event){
+    this.selectedDate = event;
+    this.findActivity();
+  }
+
+  findActivity(){
+    this.activity = this.activities.find(activity => {let date = activity.getDate();
+      return (date.getDate() === this.selectedDate.getDate() && 
+              date.getMonth() === this.selectedDate.getMonth() && 
+              date.getFullYear() === this.selectedDate.getFullYear());
+        }
+      )
+
+    this.isActivityDate = true;
+
+    if(!this.activity){
+      let formattedDate = formatDate(this.selectedDate, 'dd MMMM', 'NL');
+      this.defaultActivity.title = `Op ${formattedDate} is er geen activiteit gepland`;
+      this.activity = this.defaultActivity;
+      this.isActivityDate = false
+    }
+  }
   
+
   dateClass() {
-    console.log(this.events)
-    return (date: Date): MatCalendarCellCssClasses => {
-      const highlightDate = this.events
-        .map(event => new Date(event.date))
-        .some(d => d.getDate() === date.getDate() && d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear());
-      return highlightDate ? 'event' : '';
+      return (date: Date): MatCalendarCellCssClasses => {        
+        const highlightDate = this.activities
+          .map(activity => activity.getDate())
+          .some(activityDate => activityDate.getDate() === date.getDate() && 
+                                activityDate.getMonth() === date.getMonth() && 
+                                activityDate.getFullYear() === date.getFullYear());
+        return highlightDate ? 'event' : '';
     };
   }
 }

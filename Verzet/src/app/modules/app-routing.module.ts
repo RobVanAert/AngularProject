@@ -5,11 +5,12 @@ import { AppComponent } from '../components/app/app.component';
 import { CalenderComponent } from '../components/calender/calender.component';
 
 const routes: Routes = [
-  {path: 'home', component:HomeComponent },
-  {path: 'kalender', component: CalenderComponent }
+  {path: 'home', component: HomeComponent },
+  {path: 'kalender', component: CalenderComponent },
+  {path: '', component: HomeComponent}
 
 ];
-
+ 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

@@ -3,7 +3,19 @@
   <div class="calenderContainer" fxLayout="row" fxLayout.xs="column"  fxLayoutAlign="center">
       <div fxFlex="35%" >
         <mat-card>
-          <mat-calendar [dateClass]="dateClass()" [selected]="selectedDate" (selectedChange)="onSelect($event)"> </mat-calendar>
+          <mat-calendar *ngIf='this.activities.length' [dateClass]="dateClass()" [selected]="selectedDate" (selectedChange)="onSelect($event)"> </mat-calendar>
+        </mat-card>
+      </div>
+      <div>
+        <mat-card>
+          <h4 fxLayout="row">
+            <div *ngIf = 'isActivityDate'>{{activity.getDate() | date :'dd MMMM' :'' :'NL'}}: &nbsp;</div>
+            <div> {{activity.title}}</div>
+          </h4>
+          <div *ngIf = 'isActivityDate'> 
+            <p>Vertrek uur: {{activity.getStartHour()}}</p>
+            <p>Vertrekplaats: {{activity.place}}</p>
+          </div>
         </mat-card>
       </div>
   </div>
