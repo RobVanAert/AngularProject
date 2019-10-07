@@ -19,6 +19,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { CalenderComponent } from './components/calender/calender.component';
 import { CustomDateAdapter } from './components/calender/custom-date-adapter';
 import { registerLocaleData } from '@angular/common';
+import { RouteComponent } from './components/route/route.component';
 
 registerLocaleData(localeNl, 'NL');
 
@@ -30,6 +31,7 @@ registerLocaleData(localeNl, 'NL');
     HomeComponent,
     FooterComponent,
     CalenderComponent,
+    RouteComponent,
   ],
   imports: [
     BrowserModule,
