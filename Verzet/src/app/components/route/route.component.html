@@ -5,8 +5,8 @@
         <p *ngIf = 'startHour'>Vertrek uur: {{startHour}}</p>
         <p *ngIf = 'place'>Vertrekplaats: {{place}}</p>
     </div>
-    <div *ngIf = 'routeId' id = "bikemap" >
+    <div *ngIf = 'routeId' class = "displaySmall" >
         <h5>Kaart:</h5>
-        <iframe [src]="safeRouteUrl" id = "bikemapFrame" scrolling = "no"></iframe> 
+        <iframe [src]="getSafeUrl(route.routeUrl)" class = "bikeMapframe frameNormal" scrolling = "no"></iframe> 
     </div>
 </div>

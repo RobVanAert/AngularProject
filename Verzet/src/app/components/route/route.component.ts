@@ -15,18 +15,18 @@ export class RouteComponent implements OnInit {
   @Input() place: string;
 
   route: Route = new Route();
-  safeRouteUrl: SafeResourceUrl = ''
 
   constructor(private routeService: RouteService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     if(this.routeId){
       this.routeService.getRoute(this.routeId).subscribe(
-        route => {
-          this.route = route;
-          this.safeRouteUrl = this.sanitizer.bypassSecurityTrustResourceUrl(route.routeUrl);
-        }
+        route => this.route = route
       );
     }
+  }
+
+  getSafeUrl(url: string){
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 }

@@ -20,7 +20,7 @@ export class RouteService {
       route.id = id;
       route.title = data.title;
       route.distance = data.distance;
-      route.routeUrl = data.routeUrl
+      route.routeUrl = data.routeUrl;
       return route;
   }))
   }
