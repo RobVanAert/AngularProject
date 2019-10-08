@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { RouteService } from 'src/app/services/route.service';
 import { Route } from './route';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -10,17 +10,23 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class RouteComponent implements OnInit {
 
+  @Input() routeId: string;
+  @Input() startHour: string;
+  @Input() place: string;
+
   route: Route = new Route();
   safeRouteUrl: SafeResourceUrl = ''
 
   constructor(private routeService: RouteService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    this.routeService.getRoute('Sunday').subscribe(
-      route => {
-        this.route = route;
-        this.safeRouteUrl = this.sanitizer.bypassSecurityTrustResourceUrl(route.routeUrl);
-      }
-    );
+    if(this.routeId){
+      this.routeService.getRoute(this.routeId).subscribe(
+        route => {
+          this.route = route;
+          this.safeRouteUrl = this.sanitizer.bypassSecurityTrustResourceUrl(route.routeUrl);
+        }
+      );
+    }
   }
 }

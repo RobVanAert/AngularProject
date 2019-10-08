@@ -1,23 +1,32 @@
-<div class= "mainContent">
-  <h1>Kalender</h1>
-  <div class="calenderContainer" fxLayout="row" fxLayout.xs="column"  fxLayoutAlign="center">
-      <div fxFlex="35%" >
-        <mat-card>
-          <mat-calendar *ngIf='this.activities.length' [dateClass]="dateClass()" [selected]="selectedDate" (selectedChange)="onSelect($event)"> </mat-calendar>
-        </mat-card>
-      </div>
-      <div>
-        <mat-card>
-          <h4 fxLayout="row">
-            <div *ngIf = 'isActivityDate'>{{activity.getDate() | date :'dd MMMM' :'' :'NL'}}: &nbsp;</div>
-            <div> {{activity.title}}</div>
-          </h4>
-          <div *ngIf = 'isActivityDate'> 
-            <p>Vertrek uur: {{activity.getStartHour()}}</p>
-            <p>Vertrekplaats: {{activity.place}}</p>
-            <app-route></app-route>
-          </div>
-        </mat-card>
-      </div>
+<div class = "mainContent">
+  <h1 fxLayoutAlign = "center">Kalender</h1>
+  <div class = "calenderContainer" fxLayout = "row" fxLayout.xs = "column"  fxLayoutAlign = "center">
+    <div fxFlex="35%" >
+      <mat-calendar *ngIf = 'this.activities.length' [dateClass] = "dateClass()" [selected] = "selectedDate" (selectedChange) = "onSelect($event)"> </mat-calendar>
+    </div>
+    <div id = "activitiesMargin"fxFlex="35%">
+      <h3 fxLayoutAlign = "center">Komende activiteiten</h3>
+      <div id = "scrollableActivities">
+        <ul class = "upcoming">
+          <li>
+            <a class="hover" (click) = 'selectActivity(activity)'>
+              <div class = clickActivity>
+                <h4 class = 'activityContent'>{{selectedDate | date :'dd MMMM' :'' :'NL'}}: {{activity.title}}</h4>        
+              </div>
+          </a>
+          </li>
+          <li *ngFor = 'let activity of upcomingActivities'>
+            <a class="hover" (click) = 'selectActivity(activity)'>
+              <div class = clickActivity>
+                  <h4 class = 'activityContent'>{{activity.getDate() | date :'dd MMMM' :'' :'NL'}} : {{activity.title}}</h4>
+              </div>
+            </a>
+          </li>
+        </ul>
+    </div>
+    </div>
+  </div>
+  <div *ngIf = 'isActivityDate' fxLayoutAlign="center">
+      <app-route [routeId] = 'activity.tour' [place] = 'activity.place' [startHour] = 'activity.getStartHour()'></app-route>
   </div>
 </div>

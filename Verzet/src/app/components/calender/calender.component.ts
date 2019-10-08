@@ -16,12 +16,18 @@ export class CalenderComponent implements OnInit {
   activity: Activity;
   isActivityDate: boolean;
   defaultActivity: Activity = new Activity;
+  upcomingActivities: Activity[] = [];
 
-  constructor(private activitiesService: ActivityService) { }
+  constructor(private activitiesService: ActivityService) { 
+    this.defaultActivity.title = `geen activiteit`;
+  }
 
   ngOnInit() {
     this.activitiesService.getActivities().subscribe(
-      (activities: Activity[]) => {this.activities = activities;}
+      (activities: Activity[]) => {
+        this.activities = activities;
+        this.selectUpcomingActivities();
+      }
     );
 
     this.findActivity();
@@ -30,26 +36,49 @@ export class CalenderComponent implements OnInit {
   onSelect(event){
     this.selectedDate = event;
     this.findActivity();
+    this.selectUpcomingActivities();
+  }
+
+  selectActivity(activity: Activity){
+    this.activity = activity;
+    console.log(activity)
+    this.selectedDate = activity.getDate();
+    this.isActivityDate = true;
   }
 
   findActivity(){
-    this.activity = this.activities.find(activity => {let date = activity.getDate();
-      return (date.getDate() === this.selectedDate.getDate() && 
-              date.getMonth() === this.selectedDate.getMonth() && 
-              date.getFullYear() === this.selectedDate.getFullYear());
-        }
-      )
+    this.activity = this.activities.find(
+      activity => {
+        let date = activity.getDate();
+        return this.isSelectedDay(date)
+      })
 
     this.isActivityDate = true;
 
     if(!this.activity){
-      let formattedDate = formatDate(this.selectedDate, 'dd MMMM', 'NL');
-      this.defaultActivity.title = `Op ${formattedDate} is er geen activiteit gepland`;
       this.activity = this.defaultActivity;
       this.isActivityDate = false
     }
   }
+
+  isSelectedDay(date: Date): boolean 
+  {
+    return (date.getDate() === this.selectedDate.getDate() && 
+            date.getMonth() === this.selectedDate.getMonth() && 
+            date.getFullYear() === this.selectedDate.getFullYear());
+  }
   
+  selectUpcomingActivities() 
+  {
+    let startDate = new Date();
+    startDate.setHours(0,0,0,0);
+    let endDate = new Date(startDate);
+    endDate.setDate(endDate.getDate() + 56)  
+
+    this.upcomingActivities = this.activities.filter(activity => {
+      return (activity.getDate() >= startDate && activity.getDate() <= endDate && !this.isSelectedDay(activity.getDate()))
+    })
+  }
 
   dateClass() {
       return (date: Date): MatCalendarCellCssClasses => {        
