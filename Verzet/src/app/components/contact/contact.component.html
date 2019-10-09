@@ -1,1 +1,27 @@
-<p>contact works!</p>
+<div class="mainContent">
+    <form fxLayout="column" [formGroup]="contactGroup" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
+        <mat-form-field>
+            <mat-label>Naam</mat-label>
+            <input matInput formControlName="name" required>
+            <mat-error *ngIf="name.invalid">{{getNameErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>E-mail</mat-label>
+            <input matInput formControlName="email" required>
+            <mat-error *ngIf="email.invalid">{{getMailErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Onderwerp</mat-label>
+            <input matInput formControlName="subject" required>
+            <mat-error *ngIf="subject.invalid">{{getSubjectErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Bericht</mat-label>
+            <textarea matInput required formControlName="message"> </textarea>
+            <mat-error *ngIf="message.invalid">{{getMessageErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <button type="submit" [disabled]="!contactGroup.valid">Versturen</button>
+    </form>
+    
+</div>
+<!-- -->

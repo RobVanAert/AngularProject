@@ -5,6 +5,7 @@ import { AngularFirestoreModule, AngularFirestore } from '@angular/fire/firestor
 import { LayoutModule } from '@angular/cdk/layout';
 import { DateAdapter } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { MaterialModule } from './modules/shared/material.module';
 import { environment } from '../environments/environment';
@@ -22,6 +23,7 @@ import { registerLocaleData } from '@angular/common';
 import { RouteComponent } from './components/route/route.component';
 import { ContactComponent } from './components/contact/contact.component';
 
+
 registerLocaleData(localeNl, 'NL');
 
 @NgModule({
@@ -33,7 +35,7 @@ registerLocaleData(localeNl, 'NL');
     FooterComponent,
     CalenderComponent,
     RouteComponent,
-    ContactComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +45,7 @@ registerLocaleData(localeNl, 'NL');
     LayoutModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    ReactiveFormsModule
   ],
   providers: [AngularFirestore, { provide: DateAdapter, useClass: CustomDateAdapter }],
   bootstrap: [AppComponent]
