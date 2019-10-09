@@ -2,7 +2,6 @@ import { Component, OnInit, SimpleChange, SimpleChanges, OnChanges } from '@angu
 import { MatCalendarCellCssClasses } from '@angular/material';
 import { ActivityService} from 'src/app/services/activity.service';
 import { Activity } from './activity';
-import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-calender',
@@ -41,8 +40,8 @@ export class CalenderComponent implements OnInit {
 
   selectActivity(activity: Activity){
     this.activity = activity;
-    console.log(activity)
     this.selectedDate = activity.getDate();
+    this.selectUpcomingActivities();
     this.isActivityDate = true;
   }
 

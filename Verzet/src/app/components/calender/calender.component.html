@@ -2,7 +2,12 @@
   <h1 fxLayoutAlign = "center">Kalender</h1>
   <div class = "calenderContainer" fxLayout = "row" fxLayout.xs = "column"  fxLayoutAlign = "center">
     <div fxFlex="35%" >
-      <mat-calendar *ngIf = 'this.activities.length' [dateClass] = "dateClass()" [selected] = "selectedDate" (selectedChange) = "onSelect($event)"> </mat-calendar>
+      <mat-calendar 
+        *ngIf = 'this.activities.length' 
+        [dateClass] = "dateClass()" 
+        [selected] = "selectedDate" 
+        (selectedChange) = "onSelect($event)"> 
+      </mat-calendar>
     </div>
     <div id = "activitiesMargin"fxFlex="35%">
       <h3 fxLayoutAlign = "center">Komende activiteiten</h3>
@@ -18,7 +23,7 @@
           <li *ngFor = 'let activity of upcomingActivities'>
             <a class="hover" (click) = 'selectActivity(activity)'>
               <div class = clickActivity>
-                  <h4 class = 'activityContent'>{{activity.getDate() | date :'dd MMMM' :'' :'NL'}} : {{activity.title}}</h4>
+                  <p class = 'activityContent'>{{activity.getDate() | date :'dd MMMM' :'' :'NL'}} : {{activity.title}}</p>
               </div>
             </a>
           </li>
