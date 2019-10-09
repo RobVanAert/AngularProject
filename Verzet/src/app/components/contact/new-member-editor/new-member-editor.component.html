@@ -1,0 +1,24 @@
+<form fxLayout="column" [formGroup]="newMemberGroup" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
+    <mat-form-field>
+        <mat-label>Aanspreking</mat-label>
+        <input matInput formControlName="salutation">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Voornaam</mat-label>
+        <input matInput formControlName="firstName" required>
+        <mat-error *ngIf="firstName.invalid">{{getFirstNameErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Familienaam</mat-label>
+        <input matInput formControlName="lastName" required>
+        <mat-error *ngIf="lastName.invalid">{{getLastNameErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>E-mail</mat-label>
+        <input matInput formControlName="email" required>
+        <mat-error *ngIf="email.invalid">{{getMailErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-checkbox formControlName="memberVWB"> lid VWB </mat-checkbox>
+      
+    <button type="submit" [disabled]="!newMemberGroup.valid">Versturen</button>
+</form>  

@@ -11,7 +11,6 @@ import { MaterialModule } from './modules/shared/material.module';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './modules/app-routing.module';
 
-
 import { AppComponent } from './components/app/app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NavigationComponent } from './components/header/navigation/navigation.component';
@@ -23,6 +22,7 @@ import { registerLocaleData } from '@angular/common';
 import { RouteComponent } from './components/route/route.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ContactEditorComponent } from './components/contact/contact-editor/contact-editor.component';
+import { NewMemberEditorComponent } from './components/contact/new-member-editor/new-member-editor.component';
 
 
 registerLocaleData(localeNl, 'NL');
@@ -37,7 +37,8 @@ registerLocaleData(localeNl, 'NL');
     CalenderComponent,
     RouteComponent,
     ContactComponent,
-    ContactEditorComponent
+    ContactEditorComponent,
+    NewMemberEditorComponent
   ],
   imports: [
     BrowserModule,
