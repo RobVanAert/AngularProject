@@ -18,7 +18,13 @@
         <input matInput formControlName="email" required>
         <mat-error *ngIf="email.invalid">{{getMailErrorMessage()}}</mat-error>
     </mat-form-field>
-    <mat-checkbox formControlName="memberVWB"> lid VWB </mat-checkbox>
+    <div>
+        <mat-checkbox formControlName="memberVWB"> lid VWB </mat-checkbox>
+        <mat-form-field id="memberShip">
+            <mat-label>lidnummer VWB</mat-label>
+            <input matInput formControlName="membershipNumberVWB" required>
+        </mat-form-field>
+    </div>
       
     <button type="submit" [disabled]="!newMemberGroup.valid">Versturen</button>
 </form>  
