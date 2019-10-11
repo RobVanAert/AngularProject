@@ -1,5 +1,5 @@
-import { Component, OnInit, SimpleChange, SimpleChanges, OnChanges } from '@angular/core';
-import { MatCalendarCellCssClasses } from '@angular/material';
+import { Component, OnInit, ViewChild, } from '@angular/core';
+import { MatCalendarCellCssClasses, MatCalendar } from '@angular/material';
 import { ActivityService} from 'src/app/services/activity.service';
 import { Activity } from './activity';
 
@@ -10,6 +10,8 @@ import { Activity } from './activity';
 })
 export class CalenderComponent implements OnInit {
   
+  @ViewChild('calendar', {static: false}) calendar: MatCalendar<Date>;
+
   selectedDate: any = new Date();
   activities: Activity[] = [];
   activity: Activity;
@@ -42,6 +44,7 @@ export class CalenderComponent implements OnInit {
     this.activity = activity;
     this.selectedDate = activity.getDate();
     this.selectUpcomingActivities();
+    this.calendar._goToDateInView(this.selectedDate, "month")
     this.isActivityDate = true;
   }
 

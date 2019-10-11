@@ -3,6 +3,7 @@
   <div class = "calenderContainer" fxLayout = "row" fxLayout.xs = "column"  fxLayoutAlign = "center">
     <div fxFlex="35%" >
       <mat-calendar 
+        #calendar
         *ngIf = 'this.activities.length' 
         [dateClass] = "dateClass()" 
         [selected] = "selectedDate" 
