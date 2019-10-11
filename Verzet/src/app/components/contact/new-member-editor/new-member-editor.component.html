@@ -1,30 +1,83 @@
-<form fxLayout="column" [formGroup]="newMemberGroup" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
-    <mat-form-field>
-        <mat-label>Aanspreking</mat-label>
-        <input matInput formControlName="salutation">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Voornaam</mat-label>
-        <input matInput formControlName="firstName" required>
-        <mat-error *ngIf="firstName.invalid">{{getFirstNameErrorMessage()}}</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Familienaam</mat-label>
-        <input matInput formControlName="lastName" required>
-        <mat-error *ngIf="lastName.invalid">{{getLastNameErrorMessage()}}</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>E-mail</mat-label>
-        <input matInput formControlName="email" required>
-        <mat-error *ngIf="email.invalid">{{getMailErrorMessage()}}</mat-error>
-    </mat-form-field>
-    <div>
-        <mat-checkbox formControlName="memberVWB"> lid VWB </mat-checkbox>
-        <mat-form-field id="memberShip">
-            <mat-label>lidnummer VWB</mat-label>
-            <input matInput formControlName="membershipNumberVWB" required>
-        </mat-form-field>
+<div class="mainContent">
+    <div fxLayoutAlign="center">
+        <form fxLayout="column" [formGroup]="newMemberGroup" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
+            <div fxLayout="row" fxLayout.xs = "column">
+                <div  fxLayout="column" class="column">
+                    <mat-form-field>
+                        <mat-label>Aanspreking</mat-label>
+                        <input matInput formControlName="salutation">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Voornaam</mat-label>
+                        <input matInput formControlName="firstName" required>
+                        <mat-error *ngIf="firstName.invalid">{{getFirstNameErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Familienaam</mat-label>
+                        <input matInput formControlName="lastName" required>
+                        <mat-error *ngIf="lastName.invalid">{{getLastNameErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>E-mail</mat-label>
+                        <input matInput formControlName="email" required>
+                        <mat-error *ngIf="email.invalid">{{getMailErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>GSM</mat-label>
+                        <input matInput formControlName="gsm">
+                    </mat-form-field>
+                    <mat-checkbox formControlName="memberVWB" class="checkbox"> lid VWB </mat-checkbox>
+                    <mat-form-field >
+                        <mat-label>lidnummer VWB</mat-label>
+                        <input matInput formControlName="membershipNumberVWB" required>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="column" class="column columnMargin">
+                    <mat-form-field [hideRequiredMarker]="memberVWB.value">
+                        <mat-label>geboortedatum</mat-label>
+                        <input matInput [matDatepicker]="myDatepicker" formControlName="birthDate" required>
+                        <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #myDatepicker></mat-datepicker>
+                        <mat-error *ngIf="birthDate.invalid">{{getBirthDateErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field [hideRequiredMarker]="memberVWB.value">
+                        <mat-label>geslacht</mat-label>
+                        <mat-select  formControlName="gender" required>
+                            <mat-option value="man">man</mat-option>
+                            <mat-option value="vrouw">vrouw</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="gender.invalid">{{getGenderErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field [hideRequiredMarker]="memberVWB.value">
+                            <mat-label>Nationaliteit</mat-label>
+                            <input matInput formControlName="nationality" required>
+                            <mat-error *ngIf="nationality.invalid">{{getNationalityErrorMessage()}}</mat-error>
+                        </mat-form-field>
+                    <mat-form-field [hideRequiredMarker]="memberVWB.value">
+                        <mat-label>Straat</mat-label>
+                        <input matInput formControlName="street" required>
+                        <mat-error *ngIf="street.invalid">{{getStreetErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field [hideRequiredMarker]="memberVWB.value">
+                        <mat-label>huisnummer/bus</mat-label>
+                        <input matInput formControlName="number" required>
+                        <mat-error *ngIf="number.invalid">{{getNumberErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field [hideRequiredMarker]="memberVWB.value">
+                        <mat-label>postcode</mat-label>
+                        <input matInput formControlName="zipCode" required>
+                        <mat-error *ngIf="zipCode.invalid">{{getZipCodeErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field [hideRequiredMarker]="memberVWB.value">
+                        <mat-label>gemeente</mat-label>
+                        <input matInput formControlName="city" required>
+                        <mat-error *ngIf="city.invalid">{{getCityErrorMessage()}}</mat-error>
+                    </mat-form-field>        
+                </div>
+            </div>
+            <div fxLayoutAlign="center">
+                <button mat-fab color="primary" [disabled]="!newMemberGroup.valid" type="submit" class="my-fab">Versturen</button>
+            </div>
+        </form>  
     </div>
-      
-    <button type="submit" [disabled]="!newMemberGroup.valid">Versturen</button>
-</form>  
+</div>
