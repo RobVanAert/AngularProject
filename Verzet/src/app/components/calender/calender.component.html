@@ -1,12 +1,14 @@
+
 <div>
   <h1 fxLayoutAlign = "center">Kalender</h1>
   <div class = "calenderContainer" fxLayout = "row" fxLayout.xs = "column"  fxLayoutAlign = "center">
     <div fxFlex="35%" >
       <mat-calendar 
-        *ngIf = 'this.activities.length' 
-        [dateClass] = "dateClass()" 
-        [selected] = "selectedDate" 
-        (selectedChange) = "onSelect($event)"> 
+        #calendar
+        *ngIf='this.activities.length' 
+        [dateClass]="dateClass()" 
+        [selected]="selectedDate" 
+        (selectedChange)="onSelect($event)"> 
       </mat-calendar>
     </div>
     <div class= "columnMargin"fxFlex="35%">
@@ -14,16 +16,22 @@
       <div id = "scrollableActivities">
         <ul class = "upcoming">
           <li>
-            <a class="hover" (click) = 'selectActivity(activity)'>
-              <div class = clickActivity>
-                <h4 class = 'activityContent'>{{selectedDate | date :'dd MMMM' :'' :'NL'}}: {{activity.title}}</h4>        
+            <a class="hover" (click)='selectActivity(activity)'>
+              <div class=clickActivity>
+                <div class="activityBox" fxLayout="row">
+                  <mat-icon *ngIf="activity.tour" class='activityContent'>directions_bike</mat-icon>
+                  <h4 class='activityContent' [ngClass]="{'noIcon': !activity.tour}">{{selectedDate | date :'dd MMMM' :'' :'NL'}}: {{activity.title}}</h4>  
+                </div>       
               </div>
           </a>
           </li>
-          <li *ngFor = 'let activity of upcomingActivities'>
-            <a class="hover" (click) = 'selectActivity(activity)'>
-              <div class = clickActivity>
-                  <p class = 'activityContent'>{{activity.getDate() | date :'dd MMMM' :'' :'NL'}} : {{activity.title}}</p>
+          <li *ngFor='let activity of upcomingActivities'>
+            <a class="hover" (click)='selectActivity(activity)'>
+              <div class=clickActivity>
+                <div class="activityBox" fxLayout="row">
+                  <mat-icon *ngIf="activity.tour" class='activityContent'>directions_bike</mat-icon>
+                  <p class='activityContent' [ngClass]="{'noIcon': !activity.tour}">{{activity.getDate() | date :'dd MMMM' :'' :'NL'}} : {{activity.title}}</p>
+                </div>
               </div>
             </a>
           </li>
