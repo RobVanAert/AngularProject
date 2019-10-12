@@ -15,28 +15,30 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary" class="topnav">
-      <a [routerLink]="['/home']">
-        <img 
-        [src] = "imageURL"
-        [style.width.px] = "imageWidth"
-        alt = "Het Verzet"
-        class = "logo"/>
-      </a>
-      <span class="menu-spacer"></span>
-      <div *ngIf="!(isHandset$ | async)">
-        <a mat-button [routerLink]="['/home']">Home</a>
-        <a mat-button [routerLink]="['/kalender']">Kalender</a>
-        <a mat-button [routerLink]="['/contact']">Contact</a>
-    </div>
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
+    <mat-toolbar color="primary" class="toolbarHeight">
+      <div class="container fullRow">
+        <div class="" fxLayout="row" fxLayoutAlign="space-between center">
+        <a [routerLink]="['/home']" class="toolbarHeight">
+          <img 
+          [src] = "imageURL"
+          alt = "Het Verzet"
+          class = "logo"/>
+        </a>
+        <div *ngIf="!(isHandset$ | async)">
+          <a mat-button [routerLink]="['/home']">Home</a>
+          <a mat-button [routerLink]="['/kalender']">Kalender</a>
+          <a mat-button [routerLink]="['/contact']">Contact</a>
+        </div>
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        </div>
+      </div>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>
