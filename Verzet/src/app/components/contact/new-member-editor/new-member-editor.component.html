@@ -1,4 +1,4 @@
-<div class="mainContent">
+<div>
     <div fxLayoutAlign="center">
         <form fxLayout="column" [formGroup]="newMemberGroup" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
             <div fxLayout="row" fxLayout.xs = "column">
@@ -76,7 +76,7 @@
                 </div>
             </div>
             <div fxLayoutAlign="center">
-                <button mat-fab color="primary" [disabled]="!newMemberGroup.valid" type="submit" class="my-fab">Versturen</button>
+                <button mat-fab color="primary" [disabled]="!newMemberGroup.valid" type="submit" class="my-fab">Wordt lid</button>
             </div>
         </form>  
     </div>
