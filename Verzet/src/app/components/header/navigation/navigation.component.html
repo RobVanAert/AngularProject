@@ -12,6 +12,8 @@
       <a mat-list-item [routerLink]="['/home']" (click)="drawer.toggle()">Home</a>
       <a mat-list-item [routerLink]="['/kalender']" (click)="drawer.toggle()">Kalender</a>
       <a mat-list-item [routerLink]="['/contact']" (click)="drawer.toggle()">Contact</a>
+      <a mat-list-item [routerLink]="['/login']" (click)="drawer.toggle()" *ngIf='!isLoggedIn'>Login</a>
+      <a mat-list-item  (click)="logOut()" (click)="drawer.toggle()" *ngIf='isLoggedIn'>Logout</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -28,6 +30,8 @@
           <a mat-button [routerLink]="['/home']">Home</a>
           <a mat-button [routerLink]="['/kalender']">Kalender</a>
           <a mat-button [routerLink]="['/contact']">Contact</a>
+          <a mat-button [routerLink]="['/login']" (click)="logIn()" *ngIf='!isLoggedIn'>Login</a>
+          <a mat-button (click)="logOut()" *ngIf='isLoggedIn'>Logout</a>
         </div>
         <button
           type="button"

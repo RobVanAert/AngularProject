@@ -1,1 +1,18 @@
-<p>sign-in works!</p>
+<div fxLayoutAlign="center">
+    <form fxLayout="column" [formGroup]="signInGroup" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
+        <div fxLayout="column" class="column">
+            <mat-form-field>
+                <mat-label>E-mail</mat-label>
+                <input matInput formControlName="email" required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>wachtwoord</mat-label>
+                <input matInput formControlName="password" required>
+            </mat-form-field>
+            <div class="forgotPassword">
+                <span routerLink="/wachtwoord-vergeten">wachtwoord vergeten?</span>
+            </div>
+            <button type="submit" [disabled]="!signInGroup.valid">Versturen</button>
+        </div>
+    </form>  
+</div>

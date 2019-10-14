@@ -4,38 +4,56 @@ import { User } from '../components/user/user';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
-import * as firebase from "firebase/app"
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  user$: Observable<User>;
+  user$: Observable<User> = of(null);
 
   constructor(
     private afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
     private router: Router
-  ) { 
-      this.user$ = this.afAuth.authState.pipe(
-        switchMap(user => {
-          if(user){
-          return this.firestore.doc<User>(`users/${user.uid}`).valueChanges();
-          } else {
-            return of(null);
-          }
-        })
-      );
+  ) { }
+
+  createUserWithEmailAndPassword(email: string, password: string) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+    .then((result) => {
+      this.firestore.collection('Users').doc(result.user.uid).set({
+        email: result.user.email
+      });
+    })
+    .catch((error) => window.alert(error.message))
+  }    
+
+  signInWithEmailAndPassword(email: string, password: string){
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+    .then((result) => this.router.navigate(['home']))
+    .catch((error) => window.alert(error))
   }
 
-  createUserWithEmailAndPassword(value) {
-    return new Promise<any>((resolve, reject) => {
-      firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
-      .then(res => {
-        resolve(res);
-      }, err => reject(err))
+  signOut() {
+    return this.afAuth.auth.signOut().then(() => {
+      this.router.navigate(['home']);
     })
+  }
+
+  getCurrentUser() {
+      this.afAuth.auth.onAuthStateChanged(user => {
+      if(user){
+        this.user$ = this.firestore.doc<User>(`Users/${user.uid}`).valueChanges().pipe(map(user=>{
+          let loggedUser = new User();
+          loggedUser.email = user.email;
+          loggedUser.name = user.name; 
+          return loggedUser;
+        }))
+      } else {
+        this.user$ = of(null);
+      }
+    })
+    return this.user$;
   }
 }

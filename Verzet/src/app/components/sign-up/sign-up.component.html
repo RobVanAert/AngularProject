@@ -1,1 +1,17 @@
-<p>sign-up works!</p>
+<div fxLayoutAlign="center">
+    <form fxLayout="column" [formGroup]="signUpGroup" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
+        <div fxLayout="column" class="column">
+            <mat-form-field>
+                <mat-label>E-mail</mat-label>
+                <input matInput formControlName="email" required>
+                <mat-error *ngIf="email.invalid">{{getMailErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>wachtwoord</mat-label>
+                <input matInput formControlName="password" required>
+                <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <button type="submit" [disabled]="!signUpGroup.valid">Versturen</button>
+        </div>
+    </form>  
+</div>
