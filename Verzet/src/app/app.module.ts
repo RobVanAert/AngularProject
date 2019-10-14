@@ -23,6 +23,9 @@ import { RouteComponent } from './components/route/route.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ContactEditorComponent } from './components/contact/contact-editor/contact-editor.component';
 import { NewMemberEditorComponent } from './components/contact/new-member-editor/new-member-editor.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 
 registerLocaleData(localeNl, 'NL');
@@ -38,7 +41,10 @@ registerLocaleData(localeNl, 'NL');
     RouteComponent,
     ContactComponent,
     ContactEditorComponent,
-    NewMemberEditorComponent
+    NewMemberEditorComponent,
+    SignInComponent,
+    SignUpComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
