@@ -7,6 +7,8 @@ import { SignUpComponent } from '../components/sign-up/sign-up.component';
 import { SignInComponent } from '../components/sign-in/sign-in.component';
 import { ForgotPasswordComponent } from '../components/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from '../components/reset-password/reset-password.component';
+import { UserComponent } from '../components/user/user.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent },
@@ -16,6 +18,7 @@ const routes: Routes = [
   {path: 'login', component: SignInComponent },
   {path: 'wachtwoord-vergeten', component: ForgotPasswordComponent },
   {path: 'reset-wachtwoord', component: ResetPasswordComponent },
+  {path: 'user/:id', component: UserComponent, canActivate: [AuthGuard] },
   {path: '', component: HomeComponent}
 
 ];

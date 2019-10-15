@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscription, Subscriber } from 'rxjs';
 import { User } from '../components/user/user';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { first, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +18,25 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
     private router: Router
-  ) { }
+  ) { 
+    this.afAuth.auth.onAuthStateChanged(user => {
+      if(user){
+        this.user$ = this.firestore.doc<User>(`Users/${user.uid}`).valueChanges().pipe(map(user=>{
+          let loggedUser = new User();
+          loggedUser.email = user.email;
+          loggedUser.name = user.name; 
+          return loggedUser;
+        }))
+      } else {
+        this.user$ = of(null);
+      }
+    })
+  }
 
   getAuth() { 
     return this.afAuth.auth; 
   } 
-  
+
   createUserWithEmailAndPassword(email: string, password: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
     .then((result) => {
@@ -51,18 +65,6 @@ export class AuthService {
   }
 
   getCurrentUser() {
-      this.afAuth.auth.onAuthStateChanged(user => {
-      if(user){
-        this.user$ = this.firestore.doc<User>(`Users/${user.uid}`).valueChanges().pipe(map(user=>{
-          let loggedUser = new User();
-          loggedUser.email = user.email;
-          loggedUser.name = user.name; 
-          return loggedUser;
-        }))
-      } else {
-        this.user$ = of(null);
-      }
-    })
     return this.user$;
   }
 }

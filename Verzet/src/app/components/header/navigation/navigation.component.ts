@@ -13,8 +13,6 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavigationComponent implements OnInit {
 
   imageURL: string = "assets/images/logo.jpg";
-  imageWidth: number = 65;
-  loggedInUser;
   isLoggedIn: boolean = false;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -29,13 +27,15 @@ export class NavigationComponent implements OnInit {
     }
 
   ngOnInit(){
-    this.authService.getCurrentUser().subscribe(
-      user => this.loggedInUser = user
-    );
-    if(this.loggedInUser){
-      this.isLoggedIn = true;
-    }
+    this.authService.getCurrentUser().subscribe(user => {
+      if(user){
+        this.isLoggedIn = true
+      } else{
+        this.isLoggedIn = false
+      }
+    });
   }
+  
 
   logOut(){
     this.isLoggedIn = false;

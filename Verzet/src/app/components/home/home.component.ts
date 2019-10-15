@@ -14,8 +14,7 @@ export class HomeComponent implements OnInit {
   sponsors: Sponsor[] = [];
   imageHeight: number = 100;
 
-  constructor(private sponsorService: SponsorService, private auth: AuthService) { 
-    this.auth.getCurrentUser().subscribe(user => console.log(user));
+  constructor(private sponsorService: SponsorService) { 
   }
 
   ngOnInit() {

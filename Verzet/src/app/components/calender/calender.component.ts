@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, } from '@angular/core';
 import { MatCalendarCellCssClasses, MatCalendar } from '@angular/material';
 import { ActivityService} from 'src/app/services/activity.service';
 import { Activity } from './activity';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-calender',
@@ -21,6 +22,7 @@ export class CalenderComponent implements OnInit {
 
   constructor(private activitiesService: ActivityService) { 
     this.defaultActivity.title = `geen activiteit`;
+   
   }
 
   ngOnInit() {
@@ -29,8 +31,8 @@ export class CalenderComponent implements OnInit {
         this.activities = activities;
         this.selectUpcomingActivities();
       }
+      
     );
-
     this.findActivity();
   } 
 
