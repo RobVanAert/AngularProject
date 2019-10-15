@@ -19,6 +19,10 @@ export class AuthService {
     private router: Router
   ) { }
 
+  getAuth() { 
+    return this.afAuth.auth; 
+  } 
+  
   createUserWithEmailAndPassword(email: string, password: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
     .then((result) => {
@@ -39,6 +43,11 @@ export class AuthService {
     return this.afAuth.auth.signOut().then(() => {
       this.router.navigate(['home']);
     })
+  }
+
+  sendForgotPasswordMail(passwordResetEmail) {
+    return this.afAuth.auth.sendPasswordResetEmail(passwordResetEmail)
+    .catch((error) => window.alert(error))
   }
 
   getCurrentUser() {
