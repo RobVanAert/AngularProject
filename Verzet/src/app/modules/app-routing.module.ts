@@ -9,17 +9,18 @@ import { ForgotPasswordComponent } from '../components/forgot-password/forgot-pa
 import { ResetPasswordComponent } from '../components/reset-password/reset-password.component';
 import { UserComponent } from '../components/user/user.component';
 import { AuthGuard } from '../guards/auth.guard';
+import { SecureInnerPagesGuard } from '../guards/secure-inner-pages.guard';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent },
-  {path: 'kalender', component: CalenderComponent },
+  {path: 'kalender', component: CalenderComponent, canActivate: [AuthGuard] },
   {path: 'contact', component: ContactComponent },
-  {path: 'registreer-gebruiker', component: SignUpComponent },
-  {path: 'login', component: SignInComponent },
-  {path: 'wachtwoord-vergeten', component: ForgotPasswordComponent },
-  {path: 'reset-wachtwoord', component: ResetPasswordComponent },
+  {path: 'registreer-gebruiker', component: SignUpComponent, canActivate: [SecureInnerPagesGuard] }, // only accesible for admin; guard must still be written
+  {path: 'login', component: SignInComponent, canActivate: [SecureInnerPagesGuard] },
+  {path: 'wachtwoord-vergeten', component: ForgotPasswordComponent, canActivate: [SecureInnerPagesGuard] },
+  {path: 'reset-wachtwoord', component: ResetPasswordComponent, canActivate: [SecureInnerPagesGuard] },
   {path: 'user/:id', component: UserComponent, canActivate: [AuthGuard] },
-  {path: '', component: HomeComponent}
+  {path: '', redirectTo: '/home', pathMatch: 'full'}
 
 ];
  

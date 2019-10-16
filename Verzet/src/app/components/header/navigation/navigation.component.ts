@@ -10,10 +10,9 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
-export class NavigationComponent implements OnInit {
+export class NavigationComponent  {
 
   imageURL: string = "assets/images/logo.jpg";
-  isLoggedIn: boolean = false;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -26,24 +25,7 @@ export class NavigationComponent implements OnInit {
     private authService: AuthService) {  
     }
 
-  ngOnInit(){
-    this.authService.getCurrentUser().subscribe(user => {
-      if(user){
-        this.isLoggedIn = true
-      } else{
-        this.isLoggedIn = false
-      }
-    });
-  }
-  
-
   logOut(){
-    this.isLoggedIn = false;
     this.authService.signOut();  
   }
-
-  logIn(){
-    this.isLoggedIn = true 
-  }
-
 }
