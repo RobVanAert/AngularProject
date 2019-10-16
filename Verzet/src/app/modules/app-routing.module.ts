@@ -13,7 +13,7 @@ import { SecureInnerPagesGuard } from '../guards/secure-inner-pages.guard';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent },
-  {path: 'kalender', component: CalenderComponent, canActivate: [AuthGuard] },
+  {path: 'kalender', component: CalenderComponent },
   {path: 'contact', component: ContactComponent },
   {path: 'registreer-gebruiker', component: SignUpComponent, canActivate: [SecureInnerPagesGuard] }, // only accesible for admin; guard must still be written
   {path: 'login', component: SignInComponent, canActivate: [SecureInnerPagesGuard] },
