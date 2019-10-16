@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, } from '@angular/core';
 import { MatCalendarCellCssClasses, MatCalendar } from '@angular/material';
 import { ActivityService} from 'src/app/services/activity.service';
 import { Activity } from './activity';
-import { AuthService } from 'src/app/services/auth.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-calender',
@@ -16,9 +16,11 @@ export class CalenderComponent implements OnInit {
   selectedDate: any = new Date();
   activities: Activity[] = [];
   activity: Activity;
-  isActivityDate: boolean;
+  selectActivities: Activity[] = [];
+  isActivity: boolean;
   defaultActivity: Activity = new Activity;
   upcomingActivities: Activity[] = [];
+  groupedUpcomingActivities: Map<any, any>;
 
   constructor(private activitiesService: ActivityService) { 
     this.defaultActivity.title = `geen activiteit`;
@@ -30,15 +32,15 @@ export class CalenderComponent implements OnInit {
       (activities: Activity[]) => {
         this.activities = activities;
         this.selectUpcomingActivities();
-      }
-      
+        this.groupedUpcomingActivities = this.groupBy(this.upcomingActivities, activity => activity.getShortDate())
+      }    
     );
-    this.findActivity();
+    this.findActivities();
   } 
 
   onSelect(event){
     this.selectedDate = event;
-    this.findActivity();
+    this.findActivities();
     this.selectUpcomingActivities();
   }
 
@@ -47,21 +49,33 @@ export class CalenderComponent implements OnInit {
     this.selectedDate = activity.getDate();
     this.selectUpcomingActivities();
     this.calendar._goToDateInView(this.selectedDate, "month")
-    this.isActivityDate = true;
+    this.isActivity = true;
   }
 
-  findActivity(){
+  findActivities(){
     this.activity = this.activities.find(
       activity => {
         let date = activity.getDate();
         return this.isSelectedDay(date)
       })
 
-    this.isActivityDate = true;
+    this.isActivity = true;
 
-    if(!this.activity){
+    if(this.activity){
+      let groupedActivities = this.groupBy(this.activities, activity => activity.getShortDate());
+      let date = formatDate(this.selectedDate, 'shortDate', 'NL' ).toString();
+      this.selectActivities = groupedActivities.get(date);
+      console.log(this.selectActivities.length)
+      if(this.selectActivities.length == 1) {
+        this.isActivity = true;
+      } else {
+        this.isActivity = false;
+        this.activity = null;
+      }
+
+    } else {
       this.activity = this.defaultActivity;
-      this.isActivityDate = false
+      this.isActivity = false
     }
   }
 
@@ -93,5 +107,18 @@ export class CalenderComponent implements OnInit {
                                 activityDate.getFullYear() === date.getFullYear());
         return highlightDate ? 'event' : '';
     };
+  }
+  groupBy(list: Array<any>, keyGetter: any): Map<any, any> {
+    const map = new Map();
+    list.forEach((item) => {
+         const key = keyGetter(item);
+         const collection = map.get(key);
+         if (!collection) {
+             map.set(key, [item]);
+         } else {
+             collection.push(item);
+         }
+    });
+    return map;
   }
 }

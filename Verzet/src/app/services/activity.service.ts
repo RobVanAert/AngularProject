@@ -13,9 +13,10 @@ export class ActivityService {
 
   getActivities(): Observable<Activity[]>
   {
-    return this.firestore.collection<Activity>("Events").valueChanges().pipe(map(collection => {
+    return this.firestore.collection<Activity>("Events").valueChanges({idField: 'activityId'}).pipe(map(collection => {
       return collection.map(a => {
           let activity = new Activity();
+          activity.id = a.activityId
           activity.date = a.date;
           activity.title = a.title;
           activity.tour = a.tour;
