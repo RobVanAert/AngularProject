@@ -1,0 +1,27 @@
+<mat-accordion *ngIf="groupedActivities">
+    <mat-expansion-panel 
+        (opened)="panelOpen(activities)" 
+        *ngFor="let activities of groupedActivitiesArray" 
+        hideToggle="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title fxLayoutAlign=" center" >{{activities[0].getDate() | date :'dd MMMM' :'' :'NL'}}</mat-panel-title>
+            <mat-panel-description *ngIf='hasOnlyOneActivity(activities)'>
+                {{activities[0].title}}
+            </mat-panel-description>
+            <mat-panel-description *ngIf='! hasOnlyOneActivity(activities)' class='noMargin' fxLayoutAlign="end center">
+                <mat-icon class='icon'>expand_more</mat-icon>    
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <li *ngFor='let activity of activities; last as last'>
+            <a class="hover" (click)='selectActivity(activity)'>
+              <div class=clickActivity>
+                <div class="activityBox" fxLayout="row">
+                  <mat-icon *ngIf="isBike(activity)" class='activityContent'>directions_bike</mat-icon>
+                  <p class='activityContent' [ngClass]="{'noIcon': !isBike(activity)}">{{activity.getDate() | date :'dd MMMM' :'' :'NL'}} : {{activity.title}}</p>
+                </div>
+              </div>
+            </a>
+            <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+        </li>
+    </mat-expansion-panel>
+</mat-accordion>

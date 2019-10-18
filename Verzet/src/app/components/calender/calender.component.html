@@ -14,32 +14,20 @@
     <div class= "columnMargin"fxFlex="35%">
       <h3 fxLayoutAlign = "center">Komende activiteiten</h3>
       <div id = "scrollableActivities">
-        <ul class = "upcoming">
-          <li>
-            <a class="hover" (click)='selectActivity(activity)'>
-              <div class=clickActivity>
-                <div class="activityBox" fxLayout="row">
-                  <mat-icon *ngIf="activity.tour" class='activityContent'>directions_bike</mat-icon>
-                  <h4 class='activityContent' [ngClass]="{'noIcon': !activity.tour}">{{selectedDate | date :'dd MMMM' :'' :'NL'}}: {{activity.title}}</h4>  
-                </div>       
-              </div>
-          </a>
-          </li>
-          <li *ngFor='let activity of upcomingActivities'>
-            <a class="hover" (click)='selectActivity(activity)'>
-              <div class=clickActivity>
-                <div class="activityBox" fxLayout="row">
-                  <mat-icon *ngIf="activity.tour" class='activityContent'>directions_bike</mat-icon>
-                  <p class='activityContent' [ngClass]="{'noIcon': !activity.tour}">{{activity.getDate() | date :'dd MMMM' :'' :'NL'}} : {{activity.title}}</p>
-                </div>
-              </div>
-            </a>
-          </li>
-        </ul>
+        <a class="hover" (click)='selectActivity(activity)'>
+          <div class=clickActivity>
+            <div class="activityBox" fxLayout="row">
+              <h4 class='activityContent' [ngClass]="{'noIcon': !activity.tour}">{{selectedDate | date :'dd MMMM' :'' :'NL'}}: {{activity.title}}</h4>  
+            </div>       
+          </div>
+        </a>
+        <app-activity-expansion 
+          [groupedActivities]="groupedUpcomingActivities" (selectedActivity)=" selectActivity($event)"></app-activity-expansion >
     </div>
     </div>
   </div>
   <div *ngIf = 'isActivity' fxLayoutAlign="center">
-      <app-route [routeId] = 'activity.tour' [place] = 'activity.place' [startHour] = 'activity.getStartHour()'></app-route>
+      <app-route [routeId]="activity.tour" [place]="activity.place" [startHour]="activity.getStartHour()"></app-route>
   </div>
+  
 </div>

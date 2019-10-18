@@ -6,6 +6,7 @@ export class Activity {
     title: string;
     place: string
     tour: string;
+    type: string;
 
     getDate() {
         return this.date.toDate();

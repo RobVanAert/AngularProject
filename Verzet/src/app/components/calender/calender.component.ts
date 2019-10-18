@@ -48,6 +48,7 @@ export class CalenderComponent implements OnInit {
     this.activity = activity;
     this.selectedDate = activity.getDate();
     this.selectUpcomingActivities();
+    this.groupedUpcomingActivities = this.groupBy(this.upcomingActivities, activity => activity.getShortDate())
     this.calendar._goToDateInView(this.selectedDate, "month")
     this.isActivity = true;
   }
@@ -59,18 +60,14 @@ export class CalenderComponent implements OnInit {
         return this.isSelectedDay(date)
       })
 
-    this.isActivity = true;
-
     if(this.activity){
       let groupedActivities = this.groupBy(this.activities, activity => activity.getShortDate());
       let date = formatDate(this.selectedDate, 'shortDate', 'NL' ).toString();
       this.selectActivities = groupedActivities.get(date);
-      console.log(this.selectActivities.length)
       if(this.selectActivities.length == 1) {
         this.isActivity = true;
       } else {
         this.isActivity = false;
-        this.activity = null;
       }
 
     } else {
@@ -94,7 +91,7 @@ export class CalenderComponent implements OnInit {
     endDate.setDate(endDate.getDate() + 56)  
 
     this.upcomingActivities = this.activities.filter(activity => {
-      return (activity.getDate() >= startDate && activity.getDate() <= endDate && !this.isSelectedDay(activity.getDate()))
+      return (activity.getDate() >= startDate && activity.getDate() <= endDate && (activity.id !== this.activity.id))
     })
   }
 

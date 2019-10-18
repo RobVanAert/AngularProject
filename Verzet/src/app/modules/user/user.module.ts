@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
     SignInComponent,
     SignUpComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
   ],
   imports: [
     SharedModule,

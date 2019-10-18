@@ -17,6 +17,7 @@ import {
   MatCardModule,
   MatFormFieldModule,
   MatSnackBarModule,
+  MatExpansionModule,
 } from '@angular/material';
 
 
@@ -40,7 +41,8 @@ import {
     MatNativeDateModule,
     MatCardModule,
     MatFormFieldModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatExpansionModule
   ],
  
 
@@ -61,7 +63,8 @@ import {
     MatNativeDateModule,
     MatCardModule,
     MatFormFieldModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatExpansionModule
   ]
 })
 export class MaterialModule { }

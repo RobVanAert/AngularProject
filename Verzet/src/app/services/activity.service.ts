@@ -13,7 +13,8 @@ export class ActivityService {
 
   getActivities(): Observable<Activity[]>
   {
-    return this.firestore.collection<Activity>("Events").valueChanges({idField: 'activityId'}).pipe(map(collection => {
+    return this.firestore.collection<Activity>("Events", ref => 
+    ref.orderBy('date','asc')).valueChanges({idField: 'activityId'}).pipe(map(collection => {
       return collection.map(a => {
           let activity = new Activity();
           activity.id = a.activityId
@@ -21,6 +22,7 @@ export class ActivityService {
           activity.title = a.title;
           activity.tour = a.tour;
           activity.place = a.place;
+          activity.type = a.type;
           return activity;
       })
     }))

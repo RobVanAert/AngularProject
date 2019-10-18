@@ -25,6 +25,7 @@ import { ContactEditorComponent } from './components/contact/contact-editor/cont
 import { NewMemberEditorComponent } from './components/contact/new-member-editor/new-member-editor.component';
 import { UserModule } from './modules/user/user.module';
 import { SharedModule } from './modules/shared/shared.module';
+import { ActivityExpansionComponent } from './components/activity-expansion/activity-expansion.component';
 
 registerLocaleData(localeNl, 'NL');
 
@@ -40,6 +41,7 @@ registerLocaleData(localeNl, 'NL');
     ContactComponent,
     ContactEditorComponent,
     NewMemberEditorComponent,
+    ActivityExpansionComponent,
     
   ],
   imports: [
