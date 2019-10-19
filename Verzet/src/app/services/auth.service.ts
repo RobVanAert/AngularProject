@@ -23,8 +23,10 @@ export class AuthService {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.isLoggedIn = true;
+        sessionStorage.setItem('loggedIn', JSON.stringify(true))
       } else {
         this.isLoggedIn = false;
+        sessionStorage.removeItem('loggedIn')
       }
     })
     

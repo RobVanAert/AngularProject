@@ -2,7 +2,7 @@
     <div fxLayoutAlign="center">
         <form fxLayout="column" [formGroup]="newMemberGroup" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
             <div fxLayout="row" fxLayout.xs = "column">
-                <div  fxLayout="column" class="column">
+                <div  fxLayout="column" class="formColumn">
                     <mat-form-field>
                         <mat-label>Aanspreking</mat-label>
                         <input matInput formControlName="salutation">

@@ -1,18 +1,19 @@
-<div fxLayoutAlign="center">
-    <form fxLayout="column" [formGroup]="signInGroup" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
-        <div fxLayout="column" class="column">
+<div fxLayout="column" fxLayoutAlign="center center">
+    <h1>Login</h1>
+    <form [formGroup]="signInGroup" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
+        <div fxLayout="column" fxLayoutAlign="center center" class="formColumn">
             <mat-form-field>
                 <mat-label>E-mail</mat-label>
                 <input matInput formControlName="email" required>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>wachtwoord</mat-label>
-                <input matInput formControlName="password" required>
+                <input matInput type='password' formControlName="password" required>
             </mat-form-field>
-            <div class="forgotPassword">
+            <div class="forgotPassword hover">
                 <span routerLink="/wachtwoord-vergeten">wachtwoord vergeten?</span>
             </div>
-            <button type="submit" [disabled]="!signInGroup.valid">Versturen</button>
+            <button type="submit" [disabled]="!signInGroup.valid" class='formSubmitButton'>Versturen</button>
         </div>
     </form>  
 </div>

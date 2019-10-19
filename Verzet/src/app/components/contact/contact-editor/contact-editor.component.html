@@ -1,7 +1,7 @@
 <div>
     <div fxLayoutAlign="center">
         <form fxLayout="column" [formGroup]="contactGroup" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
-            <div fxLayout="column" class="column">
+            <div fxLayout="column" class="formColumn">
                 <mat-form-field>
                     <mat-label>Naam</mat-label>
                     <input matInput formControlName="name" required>
