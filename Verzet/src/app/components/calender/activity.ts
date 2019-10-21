@@ -8,15 +8,15 @@ export class Activity {
     tour: string;
     type: string;
 
-    getDate() {
+    getDate(): Date {
         return this.date.toDate();
     }
 
-    getStartHour() {
+    getStartHour(): string {
         return formatDate(this.getDate(), 'hh:mm', 'NL' )
     }
 
-    getShortDate() {
+    getShortDate(): string {
         return formatDate(this.getDate(), 'shortDate', 'NL' )
     }
 

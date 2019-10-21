@@ -14,15 +14,18 @@
     <div class= "columnMargin"fxFlex="35%">
       <h3 fxLayoutAlign = "center">Komende activiteiten</h3>
       <div id = "scrollableActivities">
-        <a class="hover" (click)='selectActivity(activity)'>
+        <a class="hover" (click)='selectActivity(activity)' *ngIf="isActivity">
           <div class=clickActivity>
             <div class="activityBox" fxLayout="row">
-              <h4 class='activityContent' [ngClass]="{'noIcon': !activity.tour}">{{selectedDate | date :'dd MMMM' :'' :'NL'}}: {{activity.title}}</h4>  
+              <h4 class='activityContent' [ngClass]="{'noIcon': !activity.tour}">{{activity.getDate() | date :'dd MMMM' :'' :'NL'}}: {{activity.title}}</h4>  
             </div>       
           </div>
         </a>
         <app-activity-expansion 
-          [groupedActivities]="groupedUpcomingActivities" (selectedActivity)=" selectActivity($event)"></app-activity-expansion >
+          [groupedActivities]="groupedUpcomingActivities" 
+          (selectedActivity)="selectActivity($event)"
+          (openedDate)="listSelectedDate($event)">
+        </app-activity-expansion >
     </div>
     </div>
   </div>

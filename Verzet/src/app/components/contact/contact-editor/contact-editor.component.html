@@ -1,7 +1,6 @@
-<div>
     <div fxLayoutAlign="center">
-        <form fxLayout="column" [formGroup]="contactGroup" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
-            <div fxLayout="column" class="formColumn">
+        <form [formGroup]="contactGroup" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
+            <div fxLayout="column" fxLayoutAlign="center center" class="formColumn">
                 <mat-form-field>
                     <mat-label>Naam</mat-label>
                     <input matInput formControlName="name" required>
@@ -22,8 +21,7 @@
                     <textarea matInput required formControlName="message"> </textarea>
                     <mat-error *ngIf="message.invalid">{{getMessageErrorMessage()}}</mat-error>
                 </mat-form-field>
-                <button type="submit" [disabled]="!contactGroup.valid">Versturen</button>
+                <button mat-flat-button color="primary" class="formSubmitButton"  type="submit" [disabled]="!contactGroup.valid">Versturen</button>
             </div>
         </form>  
-    </div>
-</div>    
+    </div>  

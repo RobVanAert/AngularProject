@@ -15,12 +15,13 @@ export class CalenderComponent implements OnInit {
 
   selectedDate: any = new Date();
   activities: Activity[] = [];
-  activity: Activity;
+  activity: Activity = new Activity;
   selectActivities: Activity[] = [];
   isActivity: boolean;
   defaultActivity: Activity = new Activity;
   upcomingActivities: Activity[] = [];
   groupedUpcomingActivities: Map<any, any>;
+  groupedSelectedDate: string = null;
 
   constructor(private activitiesService: ActivityService) { 
     this.defaultActivity.title = `geen activiteit`;
@@ -32,16 +33,18 @@ export class CalenderComponent implements OnInit {
       (activities: Activity[]) => {
         this.activities = activities;
         this.selectUpcomingActivities();
-        this.groupedUpcomingActivities = this.groupBy(this.upcomingActivities, activity => activity.getShortDate())
+        this.groupedUpcomingActivities = this.groupBy(this.upcomingActivities, activity => activity.getShortDate()) 
+        this.findActivities();      
       }    
     );
-    this.findActivities();
+    
   } 
 
   onSelect(event){
     this.selectedDate = event;
     this.findActivities();
     this.selectUpcomingActivities();
+    this.groupedUpcomingActivities = this.groupBy(this.upcomingActivities, activity => activity.getShortDate())
   }
 
   selectActivity(activity: Activity){
@@ -54,20 +57,23 @@ export class CalenderComponent implements OnInit {
   }
 
   findActivities(){
-    this.activity = this.activities.find(
+    let foundActivity = this.activities.find(
       activity => {
         let date = activity.getDate();
         return this.isSelectedDay(date)
       })
 
-    if(this.activity){
+    if(foundActivity){
       let groupedActivities = this.groupBy(this.activities, activity => activity.getShortDate());
       let date = formatDate(this.selectedDate, 'shortDate', 'NL' ).toString();
       this.selectActivities = groupedActivities.get(date);
       if(this.selectActivities.length == 1) {
         this.isActivity = true;
+        this.activity = foundActivity;
+        this.groupedSelectedDate = null;
       } else {
         this.isActivity = false;
+        this.groupedSelectedDate = foundActivity.getShortDate();
       }
 
     } else {
@@ -93,6 +99,10 @@ export class CalenderComponent implements OnInit {
     this.upcomingActivities = this.activities.filter(activity => {
       return (activity.getDate() >= startDate && activity.getDate() <= endDate && (activity.id !== this.activity.id))
     })
+  }
+
+  listSelectedDate(date){
+    this.selectedDate = date;
   }
 
   dateClass() {

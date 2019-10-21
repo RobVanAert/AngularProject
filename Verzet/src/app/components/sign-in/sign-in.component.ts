@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
+import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-in',
@@ -21,8 +21,8 @@ export class SignInComponent implements OnInit {
 
   createForm() {
     this.signInGroup = this.formBuilder.group ({ 
-      email: [''],
-      password: [''],
+      email: ['', Validators.email],
+      password: ['', Validators.minLength(8)],
     })
   }
 

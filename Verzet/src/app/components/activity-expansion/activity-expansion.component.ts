@@ -8,8 +8,9 @@ import { Activity } from '../calender/activity';
 })
 export class ActivityExpansionComponent implements OnInit, OnChanges {
 
-  @Input() groupedActivities: Map<string, Array<Activity>> = null;
+  @Input() groupedActivities: Map<string, Array<Activity>> = new Map();
   @Output() selectedActivity = new EventEmitter<Activity>();
+  @Output() openedDate = new EventEmitter<Date>();
   groupedActivitiesArray:Activity[][];
   
 
@@ -20,17 +21,25 @@ export class ActivityExpansionComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    if(this.groupedActivities){
     this.groupedActivitiesArray = Array.from(this.groupedActivities.values());
+    }
    
   }
 
-  selectActivity(activity: Activity){
+  selectActivity(activity: Activity) {
     this.selectedActivity.emit(activity);
   }
 
+  emitSelectedDate(date: Date) {
+    this.openedDate.emit(date);
+  }
+
   panelOpen(activities: Activity[]){
-    if(activities.length === 1){
+    if(activities.length === 1) {
       this.selectActivity(activities.pop());
+    } else {
+      this.emitSelectedDate(activities[0].getDate());
     }
   }
 
@@ -42,10 +51,9 @@ export class ActivityExpansionComponent implements OnInit, OnChanges {
   }
 
   isBike(activity: Activity): boolean {
-    if (activity.type === 'fietsen') {
+    if(activity.type === 'fietsen') {
       return true;
     }
     return false;
   }
-
 }

@@ -10,11 +10,13 @@ import { ResetPasswordComponent } from '../components/reset-password/reset-passw
 import { UserComponent } from '../components/user/user.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { SecureInnerPagesGuard } from '../guards/secure-inner-pages.guard';
+import { NewMemberEditorComponent } from '../components/contact/new-member-editor/new-member-editor.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent },
   {path: 'kalender', component: CalenderComponent },
   {path: 'contact', component: ContactComponent },
+  {path: 'lid-worden', component: NewMemberEditorComponent },
   {path: 'registreer-gebruiker', component: SignUpComponent, canActivate: [SecureInnerPagesGuard] }, // only accesible for admin; guard must still be written
   {path: 'login', component: SignInComponent, canActivate: [SecureInnerPagesGuard] },
   {path: 'wachtwoord-vergeten', component: ForgotPasswordComponent, canActivate: [SecureInnerPagesGuard] },

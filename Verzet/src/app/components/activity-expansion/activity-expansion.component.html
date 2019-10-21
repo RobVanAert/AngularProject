@@ -1,10 +1,10 @@
 <mat-accordion *ngIf="groupedActivities">
     <mat-expansion-panel 
+        *ngFor="let activities of groupedActivitiesArray"
         (opened)="panelOpen(activities)" 
-        *ngFor="let activities of groupedActivitiesArray" 
         hideToggle="true">
         <mat-expansion-panel-header>
-            <mat-panel-title fxLayoutAlign=" center" >{{activities[0].getDate() | date :'dd MMMM' :'' :'NL'}}</mat-panel-title>
+            <mat-panel-title fxLayoutAlign=" center">{{activities[0].getDate() | date :'dd MMMM' :'' :'NL'}}</mat-panel-title>
             <mat-panel-description *ngIf='hasOnlyOneActivity(activities)'>
                 {{activities[0].title}}
             </mat-panel-description>

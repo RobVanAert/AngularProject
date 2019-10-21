@@ -24,7 +24,7 @@ export class SignUpComponent implements OnInit {
   createForm() {
     this.signUpGroup = this.formBuilder.group ({ 
       email: ['', [Validators.required,Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
     })
   }
 
@@ -38,7 +38,7 @@ export class SignUpComponent implements OnInit {
 
   getPasswordErrorMessage() {
     return this.password.hasError('required') ? 'u moet een onderwerp opgeven' :
-          this.password.hasError('minlength') ? 'het onderwerp moet minstens 6 karakters lang zijn' :''
+          this.password.hasError('minlength') ? 'het onderwerp moet minstens 8 karakters lang zijn' :''
   }
 
   onSubmit(formDirective: FormGroupDirective) {

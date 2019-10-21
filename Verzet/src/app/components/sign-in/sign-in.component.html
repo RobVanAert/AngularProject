@@ -8,12 +8,12 @@
             </mat-form-field>
             <mat-form-field>
                 <mat-label>wachtwoord</mat-label>
-                <input matInput type='password' formControlName="password" required>
+                <input matInput type='password' type="password" formControlName="password" required>
             </mat-form-field>
             <div class="forgotPassword hover">
                 <span routerLink="/wachtwoord-vergeten">wachtwoord vergeten?</span>
             </div>
-            <button type="submit" [disabled]="!signInGroup.valid" class='formSubmitButton'>Versturen</button>
+            <button mat-flat-button color="primary" type="submit" [disabled]="!signInGroup.valid" class='formSubmitButton'>Versturen</button>
         </div>
     </form>  
 </div>
