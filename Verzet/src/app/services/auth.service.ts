@@ -1,10 +1,10 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { User } from '../components/user/user';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,7 @@ export class AuthService {
 
   user$: Observable<User> = of(null);
   isLoggedIn: boolean;
+  uid: string;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -23,23 +24,12 @@ export class AuthService {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.isLoggedIn = true;
-        sessionStorage.setItem('loggedIn', JSON.stringify(true))
+        sessionStorage.setItem('loggedIn', JSON.stringify(true));
+        sessionStorage.setItem('uid', JSON.stringify(user.uid));
       } else {
         this.isLoggedIn = false;
         sessionStorage.removeItem('loggedIn')
-      }
-    })
-    
-      this.afAuth.auth.onAuthStateChanged(user => {
-      if(user){
-        this.user$ = this.firestore.doc<User>(`Users/${user.uid}`).valueChanges().pipe(map(user=>{
-          let loggedUser = new User();
-          loggedUser.email = user.email;
-          loggedUser.name = user.name; 
-          return loggedUser;
-        }))
-      } else {
-        this.user$ = of(null);
+        sessionStorage.removeItem('uid')
       }
     })
   }
@@ -55,31 +45,33 @@ export class AuthService {
         email: result.user.email
       });
     })
-    .catch((error) => window.alert(error.message))
+    .catch((error) => window.alert(error.message));
   }    
 
   signInWithEmailAndPassword(email: string, password: string){
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-    .then((result) =>{
-      this.router.navigate(['home']);
-      sessionStorage.setItem('loggedIn', JSON.stringify(true))
+    .then((result) => { 
+      this.router.navigate(['user', result.user.uid]);
+      sessionStorage.setItem('loggedIn', JSON.stringify(true));
+      sessionStorage.setItem('uid', JSON.stringify(result.user.uid));
     })
-    .catch((error) => window.alert(error))
+    .catch((error) => window.alert(error));
   }
 
   signOut() {
     return this.afAuth.auth.signOut().then(() => {
       this.router.navigate(['home']);
-      sessionStorage.removeItem('loggedIn')
+      sessionStorage.removeItem('loggedIn');
+      sessionStorage.removeItem('uid');
     })
   }
 
   sendForgotPasswordMail(passwordResetEmail) {
     return this.afAuth.auth.sendPasswordResetEmail(passwordResetEmail)
-    .catch((error) => window.alert(error))
+    .catch((error) => window.alert(error));
   }
 
-  getCurrentUser() {
-    return this.user$;
+  getLoggedUid() {
+    return this.afAuth.authState;
   }
 }

@@ -1,15 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import localeNl from '@angular/common/locales/nl';
-import { AngularFirestoreModule, AngularFirestore } from '@angular/fire/firestore';
-import { LayoutModule } from '@angular/cdk/layout';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { DateAdapter } from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AngularFireModule } from 'angularfire2';
-import { MaterialModule } from './modules/shared/material.module';
-import { environment } from '../environments/environment';
-import { AppRoutingModule } from './modules/app-routing.module';
 
 import { AppComponent } from './components/app/app.component';
 import { HeaderComponent } from './components/header/header.component';

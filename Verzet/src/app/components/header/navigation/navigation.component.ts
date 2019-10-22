@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavigationComponent  {
 
   imageURL: string = "assets/images/logo.jpg";
-
+  uid?: string;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -23,6 +23,7 @@ export class NavigationComponent  {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private authService: AuthService) {  
+      this.uid = JSON.parse(sessionStorage.getItem('uid'))
     }
 
   logOut(){
