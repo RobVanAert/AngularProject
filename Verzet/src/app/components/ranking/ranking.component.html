@@ -1,0 +1,10 @@
+<mat-form-field>
+    <mat-label>Kies jaar</mat-label>
+    <select matNativeControl (selectionChange)="changeYear($event.value)">
+        <option *ngFor="let year of availableYears" [value]="year">
+            {{year}}
+        </option>
+    </select>
+</mat-form-field>
+
+

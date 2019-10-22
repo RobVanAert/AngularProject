@@ -43,9 +43,11 @@ export class UserComponent implements OnInit {
   }
 
   private calculateAge() {
-    let diff = new Date().getTime() - this.user.birthDate.getTime();
-    diff /= (60*60*24*1000);
-    return Math.abs(Math.round(diff/365.25));
-  } 
+    if(this.user.birthDate) {
+      let diff = new Date().getTime() - this.user.birthDate.getTime();
+      diff /= (60*60*24*1000);
+      return Math.abs(Math.round(diff/365.25));
+    } 
+  }
 }
 

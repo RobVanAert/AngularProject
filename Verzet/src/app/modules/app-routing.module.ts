@@ -11,6 +11,7 @@ import { UserComponent } from '../components/user/user.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { SecureInnerPagesGuard } from '../guards/secure-inner-pages.guard';
 import { NewMemberEditorComponent } from '../components/contact/new-member-editor/new-member-editor.component';
+import { RankingComponent } from '../components/ranking/ranking.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'wachtwoord-vergeten', component: ForgotPasswordComponent, canActivate: [SecureInnerPagesGuard] },
   {path: 'reset-wachtwoord', component: ResetPasswordComponent, canActivate: [SecureInnerPagesGuard] },
   {path: 'user/:id', component: UserComponent, canActivate: [AuthGuard] },
+  {path: 'klassement', component: RankingComponent, canActivate: [AuthGuard] },
   {path: '', redirectTo: '/home', pathMatch: 'full'}
 
 ];

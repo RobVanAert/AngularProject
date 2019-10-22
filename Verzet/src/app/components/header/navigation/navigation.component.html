@@ -14,6 +14,7 @@
       <a mat-list-item [routerLink]="['/contact']" (click)="drawer.toggle()">Contact</a>
       <a mat-list-item [routerLink]="['/login']" (click)="drawer.toggle()" *ngIf='! authService.isLoggedIn'>Login</a>
       <div *ngIf='authService.isLoggedIn'>
+        <a mat-list-item [routerLink]="['klassement']" (click)="drawer.toggle()">Klassement</a>
         <a mat-list-item [routerLink]="['/user',uid]" (click)="drawer.toggle()">Mijn profiel</a>
         <a mat-list-item  (click)="logOut()" (click)="drawer.toggle()" >Logout</a>
       </div>
@@ -37,6 +38,7 @@
           <a mat-button [routerLink]="['/contact']">Contact</a>        
           <a mat-button [routerLink]="['/login']" *ngIf='!authService.isLoggedIn'>Login</a>
           <div *ngIf='authService.isLoggedIn'>
+            <a mat-button [routerLink]="['klassement']">Klassement</a>
             <a mat-button [routerLink]="['/user',uid]">Mijn profiel</a>
             <a mat-button (click)="logOut()">Logout</a>
           </div>

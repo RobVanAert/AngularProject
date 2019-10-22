@@ -34,7 +34,7 @@ export class UserService {
       user.firstName = resultUser.firstName; 
       user.lastName = resultUser.lastName; 
       user.bike = resultUser.bike; 
-      user.birthDate = resultUser.birthDate.toDate(); 
+      user.birthDate = resultUser.birthDate ? resultUser.birthDate.toDate() : null; 
       return user;
     }))
   }
