@@ -18,6 +18,7 @@ import {
   MatFormFieldModule,
   MatSnackBarModule,
   MatExpansionModule,
+  MatTableModule,
 } from '@angular/material';
 
 
@@ -42,7 +43,8 @@ import {
     MatCardModule,
     MatFormFieldModule,
     MatSnackBarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTableModule
   ],
  
 
@@ -64,7 +66,8 @@ import {
     MatCardModule,
     MatFormFieldModule,
     MatSnackBarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTableModule
   ]
 })
 export class MaterialModule { }

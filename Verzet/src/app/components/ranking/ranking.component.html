@@ -7,4 +7,17 @@
     </select>
 </mat-form-field>
 
-
+<table class="table">
+    <tr>
+        <th>plaats</th>
+        <th>rijder</th>
+        <th>gereden ritten</th>
+        <th>gereden km </th>
+    </tr>
+    <tr *ngFor='let ranking of rankings'>
+        <td>{{ranking.ranking}}</td>
+        <td>{{ranking.user}}</td>
+        <td>{{ranking.totalRides}}</td>
+        <td>{{ranking.totalDistance}}</td>
+    </tr>
+</table>

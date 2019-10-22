@@ -115,6 +115,7 @@ export class CalenderComponent implements OnInit {
         return highlightDate ? 'event' : '';
     };
   }
+  
   groupBy(list: Array<any>, keyGetter: any): Map<any, any> {
     const map = new Map();
     list.forEach((item) => {

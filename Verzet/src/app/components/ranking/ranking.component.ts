@@ -14,6 +14,7 @@ export class RankingComponent implements OnInit {
   rankingYear: number;
   rankedRiders: Map<string, []>;
   rankings: Ranking[] = [];
+  displayedColumns: string[] = ['ranking', 'user', 'rides', 'distance']
   
   constructor(private rankingService: RankingService) { 
     this.actualYear = new Date().getFullYear();
@@ -50,7 +51,7 @@ export class RankingComponent implements OnInit {
   }
 
   getRankings(){
-    let vm=this;
+    let vm = this;
     this.rankingService.getRidesOfYear(this.rankingYear).subscribe(result =>{ 
       this.rankedRiders = this.groupBy(result, ride => ride.userId);
       this.rankedRiders.forEach((value: any, key: any) => {
