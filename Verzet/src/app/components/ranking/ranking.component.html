@@ -16,7 +16,11 @@
     </tr>
     <tr *ngFor='let ranking of rankings'>
         <td>{{ranking.ranking}}</td>
-        <td>{{ranking.user}}</td>
+        <td>
+            <a class="noLinkLook" [routerLink]="['/user', ranking.user]" >
+            {{ranking.user}}
+            </a>
+        </td>
         <td>{{ranking.totalRides}}</td>
         <td>{{ranking.totalDistance}}</td>
     </tr>

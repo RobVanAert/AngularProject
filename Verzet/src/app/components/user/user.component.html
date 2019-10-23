@@ -32,7 +32,7 @@
                     <label class="formLabel" for="bike">Fiets</label>
                     <input class='formColumn' id="bike" [(ngModel)]="user.bike" name="bike" [disabled]="isDisabled()">
                 </div>
-                <div class=" maxWidth" fxLayoutAlign="center center">
+                <div *ngIf='!isDisabled()' class=" maxWidth" fxLayoutAlign="center center">
                 <button mat-flat-button color="primary" class="formSubmitButton" type="submit">Update mijn info</button>
                 </div>
         </div>
