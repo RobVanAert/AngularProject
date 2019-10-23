@@ -1,35 +1,40 @@
 <div fxLayout="column" fxLayoutAlign="center center">
     <h1 *ngIf='user'>Profiel {{user.firstName}}</h1>
     <form *ngIf='user' (ngSubmit)="onSubmit()">
-        <div fxLayout="column" fxLayoutAlign="center center" class="formColumn">
-                <div fxLayout="row">
-                    <label for="firstName">Voornaam</label>
-                    <input id="firstName" [(ngModel)]="user.firstName" name="firstName" [disabled]="isDisabled()">
+        <div fxLayout="column" fxLayoutAlign="center end">
+                <div class='formField' fxLayout="row">
+                    <label class="formLabel" for="firstName">Voornaam</label>
+                    <input class='formColumn' id="firstName" [(ngModel)]="user.firstName" name="firstName" [disabled]="isDisabled()">
                 </div>
-                <div fxLayout="row">
-                    <label for="lastName">Familienaam</label>
-                    <input id="lastName" [(ngModel)]="user.lastName" name="lastName" [disabled]="isDisabled()">
+                <div class='formField' fxLayout="row">
+                    <label class="formLabel" for="lastName">Familienaam</label>
+                    <input class='formColumn' id="lastName" [(ngModel)]="user.lastName" name="lastName" [disabled]="isDisabled()">
                 </div>
-                <div fxLayout="row" *ngIf='!isDisabled()'>
-                    <label for="birthDate">GeboorteDatum</label>
-                    <input  
-                        [matDatepicker]="picker" 
-                        id="BirthDate" 
-                        [(ngModel)]="user.birthDate" 
-                        (ngModelChange)="onBirthDateChange($event)" 
-                        name="birthDate">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
+                <div class='formField' fxLayout="row" *ngIf='!isDisabled()'>
+                    <label class="formLabel" for="birthDate">GeboorteDatum</label>
+                    <div class='formColumn formDateField' fxLayoutAlign=" center">
+                        <input  
+                            mat-input
+                            [matDatepicker]="picker" 
+                            id="BirthDate" 
+                            [(ngModel)]="user.birthDate" 
+                            (ngModelChange)="onBirthDateChange($event)" 
+                            name="birthDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </div>
                 </div>
-                <div fxLayout="row">
-                    <label for="age">Leeftijd</label>
-                    <input id="age" [(ngModel)]="age" name="age" [disabled]="true">
+                <div class='formField' fxLayout="row">
+                    <label class="formLabel" for="age">Leeftijd</label>
+                    <input class='formColumn' id="age" [(ngModel)]="age" name="age" [disabled]="true">
                 </div>
-                <div fxLayout="row">
-                    <label for="bike">Fiets</label>
-                    <input id="bike" [(ngModel)]="user.bike" name="bike" [disabled]="isDisabled()">
+                <div class='formField' fxLayout="row">
+                    <label class="formLabel" for="bike">Fiets</label>
+                    <input class='formColumn' id="bike" [(ngModel)]="user.bike" name="bike" [disabled]="isDisabled()">
                 </div>
-            <button mat-flat-button color="primary" class="formSubmitButton" type="submit">Update User</button>
+                <div class=" maxWidth" fxLayoutAlign="center center">
+                <button mat-flat-button color="primary" class="formSubmitButton" type="submit">Update mijn info</button>
+                </div>
         </div>
     </form>  
 </div>
