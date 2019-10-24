@@ -9,6 +9,7 @@ import { AngularFirestoreModule, AngularFirestore } from '@angular/fire/firestor
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from '../app-routing.module';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { MedalPipe } from '../../pipes/medal.pipe';
 
 @NgModule({
   imports: [
@@ -33,7 +34,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     AngularFireModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    MedalPipe
+  ],
+  declarations: [MedalPipe]
 })
 export class SharedModule { }
