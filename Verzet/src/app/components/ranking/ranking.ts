@@ -1,5 +1,7 @@
+import { User } from '../user/user';
+
 export class Ranking {
-    user: string;
+    user: User;
     totalRides: number;
     totalDistance: number;
     ranking: number;

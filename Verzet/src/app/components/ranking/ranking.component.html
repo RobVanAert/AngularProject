@@ -17,8 +17,8 @@
         <tr *ngFor='let ranking of rankings'>
             <td [innerHTML]='ranking.ranking| medal' fxLayoutAlign="center none"></td>
             <td>
-                <a class="noLinkLook" [routerLink]="['/user', ranking.user]" >
-                {{ranking.user}}
+                <a class="noLinkLook" [routerLink]="['/user', ranking.user.id]" >
+                {{ranking.user.firstName}} {{ranking.user.lastName}}
                 </a>
             </td>
             <td>{{ranking.totalRides}}</td>

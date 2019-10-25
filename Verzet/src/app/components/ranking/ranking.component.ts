@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RankingService } from 'src/app/services/ranking.service';
 import { Ranking } from './ranking';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-ranking',
@@ -16,7 +17,7 @@ export class RankingComponent implements OnInit {
   rankings: Ranking[] = [];
   displayedColumns: string[] = ['ranking', 'user', 'rides', 'distance']
   
-  constructor(private rankingService: RankingService) { 
+  constructor(private rankingService: RankingService, private userService: UserService) { 
     this.actualYear = new Date().getFullYear();
     this.rankingYear = this.actualYear;
     this.getAvailableYears();
@@ -56,7 +57,9 @@ export class RankingComponent implements OnInit {
       this.rankedRiders = this.groupBy(result, ride => ride.userId);
       this.rankedRiders.forEach((value: any, key: any) => {
         let ranking = new Ranking();
-        ranking.user = key;
+        this.userService.getUser(key).subscribe(
+          user => ranking.user = user
+        )
         ranking.totalRides = value.length;
         ranking.totalDistance = 0;
         value.forEach(ride => {
