@@ -2,15 +2,15 @@
     <h1 *ngIf='user'>Profiel {{user.firstName}}</h1>
     <form *ngIf='user' (ngSubmit)="onSubmit()">
         <div fxLayout="column" fxLayoutAlign="center end">
-                <div class='formField' fxLayout="row">
+                <div class='formField' fxLayout="row" fxLayout.xs="column">
                     <label class="formLabel" for="firstName">Voornaam</label>
                     <input class='formColumn' id="firstName" [(ngModel)]="user.firstName" name="firstName" [disabled]="isDisabled()">
                 </div>
-                <div class='formField' fxLayout="row">
+                <div class='formField' fxLayout="row" fxLayout.xs="column">
                     <label class="formLabel" for="lastName">Familienaam</label>
                     <input class='formColumn' id="lastName" [(ngModel)]="user.lastName" name="lastName" [disabled]="isDisabled()">
                 </div>
-                <div class='formField' fxLayout="row" *ngIf='!isDisabled()'>
+                <div class='formField' fxLayout="row" fxLayout.xs="column" *ngIf='!isDisabled()'>
                     <label class="formLabel" for="birthDate">GeboorteDatum</label>
                     <div class='formColumn formDateField' fxLayoutAlign=" center">
                         <input  
@@ -24,11 +24,11 @@
                         <mat-datepicker #picker></mat-datepicker>
                     </div>
                 </div>
-                <div class='formField' fxLayout="row">
+                <div class='formField' fxLayout="row" fxLayout.xs="column">
                     <label class="formLabel" for="age">Leeftijd</label>
                     <input class='formColumn' id="age" [(ngModel)]="age" name="age" [disabled]="true">
                 </div>
-                <div class='formField' fxLayout="row">
+                <div class='formField' fxLayout="row" fxLayout.xs="column">
                     <label class="formLabel" for="bike">Fiets</label>
                     <input class='formColumn' id="bike" [(ngModel)]="user.bike" name="bike" [disabled]="isDisabled()">
                 </div>

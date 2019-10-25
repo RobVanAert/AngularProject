@@ -15,7 +15,6 @@ export class RankingComponent implements OnInit {
   rankingYear: number;
   rankedRiders: Map<string, []>;
   rankings: Ranking[] = [];
-  displayedColumns: string[] = ['ranking', 'user', 'rides', 'distance']
   
   constructor(private rankingService: RankingService, private userService: UserService) { 
     this.actualYear = new Date().getFullYear();
@@ -83,5 +82,4 @@ export class RankingComponent implements OnInit {
     } )
     return rankings;
   }
-
 }
