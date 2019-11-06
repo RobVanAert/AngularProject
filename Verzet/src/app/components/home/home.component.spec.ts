@@ -10,10 +10,6 @@ describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
   let sponsorServive: SponsorService;
-  let sponsor: Sponsor = new Sponsor();
-  sponsor.name = "testSponsor";
-  let expectedSponsors: Sponsor[] = [sponsor];
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ HomeComponent ],
@@ -38,11 +34,77 @@ describe('HomeComponent', () => {
   });
 
   it('should have a list of sponsors', () => {
+    const sponsor: Sponsor = new Sponsor();
+    const expectedSponsors: Sponsor[] = [sponsor];
+
     const spy = spyOn(sponsorServive, 'getSponsors').and.returnValue(of(expectedSponsors));
     component.ngOnInit();
+
     expect(component.sponsors).toEqual(expectedSponsors);
     expect(spy).toHaveBeenCalled();
     expect(spy).toHaveBeenCalledWith();
     expect(spy).toHaveBeenCalledTimes(1);
   })
-});
+
+  it('should render a a-tag when url is available', () => {
+    const expectedUrl = "sponsor.test"
+    const sponsor: Sponsor = new Sponsor();
+    sponsor.url = expectedUrl;
+    const expectedSponsors: Sponsor[] = [sponsor];
+    const spy = spyOn(sponsorServive, 'getSponsors').and.returnValue(of(expectedSponsors));
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledWith();
+    expect(spy).toHaveBeenCalledTimes(2);
+
+    fixture.whenStable().then(() => {
+      fixture.detectChanges
+      const htmlElement: HTMLElement = fixture.nativeElement;
+      const a = htmlElement.querySelector('a');
+      expect(a.href).toEqual("http://localhost:9876/" + expectedUrl);
+    });
+  })
+
+  it('should not render a a-tag when url is not available', () => {
+    const sponsor: Sponsor = new Sponsor();
+    const expectedSponsors: Sponsor[] = [sponsor];
+
+    const spy = spyOn(sponsorServive, 'getSponsors').and.returnValue(of(expectedSponsors));
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledWith();
+    expect(spy).toHaveBeenCalledTimes(2);
+
+    fixture.whenStable().then(() => {
+      fixture.detectChanges
+      const htmlElement: HTMLElement = fixture.nativeElement;
+      const a = htmlElement.querySelector('a');
+      expect(a).toBeNull;
+    });
+  });
+
+  it('should open link on new page', () => {
+    const expectedUrl = "sponsor.test"
+    const sponsor: Sponsor = new Sponsor();
+    sponsor.url = expectedUrl;
+    const expectedSponsors: Sponsor[] = [sponsor];
+    const spy = spyOn(sponsorServive, 'getSponsors').and.returnValue(of(expectedSponsors));
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledWith();
+    expect(spy).toHaveBeenCalledTimes(2);
+
+    fixture.whenStable().then(() => {
+      fixture.detectChanges
+      const htmlElement: HTMLElement = fixture.nativeElement;
+      const a = htmlElement.querySelector('a');
+      expect(a.target).toEqual("_blank");
+    });
+  })
+})
