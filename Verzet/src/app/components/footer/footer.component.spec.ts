@@ -24,12 +24,14 @@ describe('FooterComponent', () => {
   });
 
   it('should have a title', () => {
-    expect(component.footerTitle).toEqual('Fietsclub Het Verzet');
+    const expectedTitle: string = 'Fietsclub Het Verzet';
+    expect(component.footerTitle).toEqual(expectedTitle);
   });
 
   it('should have a title in uppercase', () => {
+    const expectedTitleUpperCase: string = 'FIETSCLUB HET VERZET'
     const htmlElement: HTMLElement = fixture.nativeElement;
     const p = htmlElement.querySelector('p');
-    expect(p.textContent).toEqual('FIETSCLUB HET VERZET');
+    expect(p.textContent).toEqual(expectedTitleUpperCase);
   })
 });
