@@ -23,7 +23,13 @@ describe('FooterComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('title is true', () => {
-    expect(component.footerTitle).toBe('Fietsclub Het Verzet');
+  it('should have a title', () => {
+    expect(component.footerTitle).toEqual('Fietsclub Het Verzet');
   });
+
+  it('should have a title in uppercase', () => {
+    const htmlElement: HTMLElement = fixture.nativeElement;
+    const p = htmlElement.querySelector('p');
+    expect(p.textContent).toEqual('FIETSCLUB HET VERZET');
+  })
 });

@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 import { SponsorService } from 'src/app/services/sponsor.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Sponsor } from './sponsor';
 import { of } from 'rxjs';
 
@@ -21,8 +20,8 @@ describe('HomeComponent', () => {
       providers: [
         SponsorService, 
         {
-          provide: AngularFirestore, useValue: {} }],
-      schemas: [NO_ERRORS_SCHEMA]
+          provide: AngularFirestore, useValue: {} 
+        }]
     })
     .compileComponents();
   }));
