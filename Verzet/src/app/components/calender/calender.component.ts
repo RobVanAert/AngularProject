@@ -13,7 +13,7 @@ export class CalenderComponent implements OnInit {
   
   @ViewChild('calendar', {static: false}) calendar: MatCalendar<Date>;
 
-  selectedDate: any = new Date();
+  selectedDate: Date = new Date();
   activities: Activity[] = [];
   activity: Activity = new Activity;
   selectActivities: Activity[] = [];

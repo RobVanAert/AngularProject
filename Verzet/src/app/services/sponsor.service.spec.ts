@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { SponsorService } from './sponsor.service';
 
-describe('SponsorServiceService', () => {
+/* describe('SponsorServiceService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
@@ -10,3 +10,4 @@ describe('SponsorServiceService', () => {
     expect(service).toBeTruthy();
   });
 });
+ */

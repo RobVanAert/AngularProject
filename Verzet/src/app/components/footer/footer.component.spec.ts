@@ -19,7 +19,11 @@ describe('FooterComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create footer', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('title is true', () => {
+    expect(component.footerTitle).toBe('Fietsclub Het Verzet');
   });
 });
