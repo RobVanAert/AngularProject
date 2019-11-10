@@ -20,6 +20,7 @@ import { UserModule } from './modules/user/user.module';
 import { SharedModule } from './modules/shared/shared.module';
 import { ActivityExpansionComponent } from './components/activity-expansion/activity-expansion.component';
 import { RankingComponent } from './components/ranking/ranking.component';
+import { TestPipe } from './pipes/test.pipe';
 
 registerLocaleData(localeNl, 'NL');
 
@@ -37,6 +38,7 @@ registerLocaleData(localeNl, 'NL');
     NewMemberEditorComponent,
     ActivityExpansionComponent,
     RankingComponent,
+    TestPipe,
     
   ],
   imports: [
