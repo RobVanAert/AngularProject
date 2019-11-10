@@ -9,7 +9,8 @@ import { of } from 'rxjs';
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
-  let sponsorServive: SponsorService;
+  let sponsorService: SponsorService;
+  
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ HomeComponent ],
@@ -25,7 +26,7 @@ describe('HomeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
-    sponsorServive = TestBed.get(SponsorService);
+    sponsorService = TestBed.get(SponsorService);
     //fixture.detectChanges();
   });
 
@@ -37,7 +38,7 @@ describe('HomeComponent', () => {
     const sponsor: Sponsor = new Sponsor();
     const expectedSponsors: Sponsor[] = [sponsor];
 
-    const spy = spyOn(sponsorServive, 'getSponsors').and.returnValue(of(expectedSponsors));
+    const spy = spyOn(sponsorService, 'getSponsors').and.returnValue(of(expectedSponsors));
     component.ngOnInit();
 
     expect(component.sponsors).toEqual(expectedSponsors);
@@ -51,7 +52,7 @@ describe('HomeComponent', () => {
     const sponsor: Sponsor = new Sponsor();
     sponsor.url = expectedUrl;
     const expectedSponsors: Sponsor[] = [sponsor];
-    const spy = spyOn(sponsorServive, 'getSponsors').and.returnValue(of(expectedSponsors));
+    const spy = spyOn(sponsorService, 'getSponsors').and.returnValue(of(expectedSponsors));
     component.ngOnInit();
     fixture.detectChanges();
 
@@ -71,7 +72,7 @@ describe('HomeComponent', () => {
     const sponsor: Sponsor = new Sponsor();
     const expectedSponsors: Sponsor[] = [sponsor];
 
-    const spy = spyOn(sponsorServive, 'getSponsors').and.returnValue(of(expectedSponsors));
+    const spy = spyOn(sponsorService, 'getSponsors').and.returnValue(of(expectedSponsors));
     component.ngOnInit();
     fixture.detectChanges();
 
@@ -92,7 +93,7 @@ describe('HomeComponent', () => {
     const sponsor: Sponsor = new Sponsor();
     sponsor.url = expectedUrl;
     const expectedSponsors: Sponsor[] = [sponsor];
-    const spy = spyOn(sponsorServive, 'getSponsors').and.returnValue(of(expectedSponsors));
+    const spy = spyOn(sponsorService, 'getSponsors').and.returnValue(of(expectedSponsors));
     component.ngOnInit();
     fixture.detectChanges();
 

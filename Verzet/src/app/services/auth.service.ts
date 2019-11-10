@@ -20,6 +20,10 @@ export class AuthService {
     private firestore: AngularFirestore,
     private router: Router
   ) {     
+    this.initializeLoggedInStatus()
+    }
+    
+  initializeLoggedInStatus() {
     this.isLoggedIn = JSON.parse(sessionStorage.getItem('loggedIn'))
     this.afAuth.authState.subscribe(user => {
       if (user) {
@@ -33,6 +37,8 @@ export class AuthService {
       }
     })
   }
+
+
 
   getAuth() { 
     return this.afAuth.auth 
@@ -73,5 +79,9 @@ export class AuthService {
 
   getLoggedUid() {
     return this.afAuth.authState;
+  }
+
+  getLoggedInStatus(): boolean {
+    return this.isLoggedIn;
   }
 }
