@@ -19,13 +19,14 @@ export class CalenderComponent implements OnInit {
   selectActivities: Activity[] = [];
   isActivity: boolean;
   defaultActivity: Activity = new Activity;
+  multipleActivity: Activity = new Activity;
   upcomingActivities: Activity[] = [];
   groupedUpcomingActivities: Map<any, any>;
   groupedSelectedDate: string = null;
 
   constructor(private activitiesService: ActivityService) { 
     this.defaultActivity.title = `geen activiteit`;
-   
+    this.multipleActivity.title ='meerdere activiteiten'
   }
 
   ngOnInit() {
@@ -37,7 +38,6 @@ export class CalenderComponent implements OnInit {
         this.findActivities();      
       }    
     );
-    
   } 
 
   onSelect(event){
@@ -73,6 +73,7 @@ export class CalenderComponent implements OnInit {
         this.groupedSelectedDate = null;
       } else {
         this.isActivity = false;
+        this.activity = this.multipleActivity;
         this.groupedSelectedDate = foundActivity.getShortDate();
       }
 
@@ -94,8 +95,8 @@ export class CalenderComponent implements OnInit {
     let startDate = new Date();
     startDate.setHours(0,0,0,0);
     let endDate = new Date(startDate);
-    endDate.setDate(endDate.getDate() + 56)  
-
+    endDate.setDate(endDate.getDate() + 56);
+    endDate.setHours(23,59,59,0)
     this.upcomingActivities = this.activities.filter(activity => {
       return (activity.getDate() >= startDate && activity.getDate() <= endDate && (activity.id !== this.activity.id))
     })

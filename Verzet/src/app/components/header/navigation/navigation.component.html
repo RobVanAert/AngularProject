@@ -12,7 +12,7 @@
       <a mat-list-item [routerLink]="['/home']" (click)="drawer.toggle()">Home</a>
       <a mat-list-item [routerLink]="['/kalender']" (click)="drawer.toggle()">Kalender</a>
       <a mat-list-item [routerLink]="['/contact']" (click)="drawer.toggle()">Contact</a>
-      <a mat-list-item [routerLink]="['/login']" (click)="drawer.toggle()" *ngIf='! authService.isLoggedIn'>Login</a>
+      <a mat-list-item [routerLink]="['/login']" (click)="drawer.toggle()" *ngIf='!authService.isLoggedIn'>Login</a>
       <div *ngIf='authService.isLoggedIn'>
         <a mat-list-item [routerLink]="['klassement']" (click)="drawer.toggle()">Klassement</a>
         <a mat-list-item [routerLink]="['/user',uid]" (click)="drawer.toggle()">Mijn profiel</a>

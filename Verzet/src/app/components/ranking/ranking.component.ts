@@ -16,18 +16,17 @@ export class RankingComponent implements OnInit {
   rankedRiders: Map<string, []>;
   rankings: Ranking[] = [];
   
-  constructor(private rankingService: RankingService, private userService: UserService) { 
+  constructor(private rankingService: RankingService, private userService: UserService) {}
+
+  ngOnInit() {
     this.actualYear = new Date().getFullYear();
     this.rankingYear = this.actualYear;
     this.getAvailableYears();
-  }
-
-  ngOnInit() {
     this.getRankings()
   }
 
   getAvailableYears() {
-    for (let index = this.actualYear; index <=2019 ; index++) {
+    for (let index = this.actualYear; index >= 2019 ; index--) {
       this.availableYears.push(index);   
     }
   }
@@ -57,7 +56,7 @@ export class RankingComponent implements OnInit {
       this.rankedRiders.forEach((value: any, key: any) => {
         let ranking = new Ranking();
         this.userService.getUser(key).subscribe(
-          user => ranking.user = user
+          user =>ranking.user = user
         )
         ranking.totalRides = value.length;
         ranking.totalDistance = 0;
@@ -73,13 +72,23 @@ export class RankingComponent implements OnInit {
 
   sortRankingToDistance(rankings: Ranking[]) {
     rankings.sort((a,b) => {
-      return b.totalDistance - a.totalDistance
+      if(b.totalDistance - a.totalDistance !== 0) {
+        return b.totalDistance - a.totalDistance;
+      } else {
+        return b.totalRides - a.totalRides;
+      }
     })
-    let index = 1;
-    rankings.forEach(ranking =>{
-      ranking.ranking = index;
-      index ++;
-    } )
+    let rankingIndex = 1;
+    rankings[0].ranking = rankingIndex;
+
+    for (let index = 1; index < rankings.length; index++) {
+      if (rankings[index].totalRides === rankings[index-1].totalRides && rankings[index].totalDistance === rankings[index-1].totalDistance) {
+        rankings[index].ranking = rankingIndex;
+      } else {
+        rankingIndex ++;
+        rankings[index].ranking = rankingIndex;
+      } 
+    }
     return rankings;
   }
 }

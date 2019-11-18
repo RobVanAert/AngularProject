@@ -27,7 +27,6 @@ describe('HomeComponent', () => {
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     sponsorService = TestBed.get(SponsorService);
-    //fixture.detectChanges();
   });
 
   it('should create home', () => {
@@ -60,12 +59,11 @@ describe('HomeComponent', () => {
     expect(spy).toHaveBeenCalledWith();
     expect(spy).toHaveBeenCalledTimes(2);
 
-    fixture.whenStable().then(() => {
-      fixture.detectChanges
-      const htmlElement: HTMLElement = fixture.nativeElement;
-      const a = htmlElement.querySelector('a');
-      expect(a.href).toEqual("http://localhost:9876/" + expectedUrl);
-    });
+   
+    const htmlElement: HTMLElement = fixture.nativeElement;
+    const a = htmlElement.querySelector('a');
+    expect(a.href).toEqual("http://localhost:9876/" + expectedUrl);
+    
   })
 
   it('should not render a a-tag when url is not available', () => {
@@ -101,11 +99,8 @@ describe('HomeComponent', () => {
     expect(spy).toHaveBeenCalledWith();
     expect(spy).toHaveBeenCalledTimes(2);
 
-    fixture.whenStable().then(() => {
-      fixture.detectChanges
-      const htmlElement: HTMLElement = fixture.nativeElement;
-      const a = htmlElement.querySelector('a');
-      expect(a.target).toEqual("_blank");
-    });
-  })
+    const htmlElement: HTMLElement = fixture.nativeElement;
+    const a = htmlElement.querySelector('a');
+    expect(a.target).toEqual("_blank");
+  });
 })
